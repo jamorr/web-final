@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Credit Card Entry</title>
+    <style>
+      fieldset {
+        display: inline;
+      }
+      .label-div {
+        min-width: 10rem;
+        float: left;
+        /* text-align: right; */
+      }
+    </style>
+    <script src="credit.js"></script>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <div class="label-div">CC Number</div>
+        <input type="text" name="cc-num" value="" />
+        <br /><br />
+        <div class="label-div">Name on card</div>
+        <input type="text" name="cc-name" value="" />
+        <br /><br />
+        <div class="label-div">Expiration</div>
+        <input
+          type="text"
+          name="cc-exp-MM"
+          size="2"
+          value=""
+          placeholder="MM"
+        />
+        <input
+          type="text"
+          name="cc-exp-YYYY"
+          size="4"
+          value=""
+          placeholder="YYYY"
+        />
+      </fieldset>
+      <br />
+      <fieldset>
+        <div class="label-div">Address</div>
+        <input type="text" name="cc-addr" value="" />
+        <br /><br />
+        <div class="label-div">Billing Address</div>
+        <input type="text" name="cc-billing-addr" value="" />
+        <br /><br />
+        <div class="label-div">Phone Number</div>
+        <input type="tel" name="cc-phone" value="" />
+      </fieldset>
+    </form>
+  </body>
+</html>
