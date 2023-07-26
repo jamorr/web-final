@@ -45,9 +45,9 @@
 		$sql = "INSERT INTO Listings (street_address, city, state_abbrev, zip, price, bedrooms, bathrooms, floor_area, lot_area)
 			VALUES ('{$list[0]}', '{$list[1]}', '{$list[2]}', '{$list[3]}', '{$list[4]}', '{$list[5]}', '{$list[6]}', '{$list[7]}', '{$list[8]}');";
 		if ($conn->query($sql) === TRUE) {
-			echo "Data insterted into 'Departments' table successfully.<br>";
+			echo "Data insterted into 'Listings' table successfully.<br>";
 		} else {
-			echo "Error inserting data into 'Departments': " . $conn->error . "<br>";
+			echo "Error inserting data into 'Listings': " . $conn->error . "<br>";
 		}
 	}
 	
