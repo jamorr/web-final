@@ -3,20 +3,38 @@ const cc_info = document.getElementById("card-info");
 const per_info = document.getElementById("personal-info");
 const cc_n = document.getElementById("cc-num-in");
 const card_logo = document.getElementById("card-logo");
-function parseIIN(e) {
-  console.log(e);
-  const ident = parseInt(e.target.value.slice(0, 2));
 
-  if (ident === 34 || ident === 37) {
-    card_logo.style.backgroundImage = "url(./assets/amex.png)";
-  } else if (ident >= 40 && ident < 50) {
-    card_logo.style.backgroundImage = "url(./assets/visa.png)";
-  } else if (ident >= 50 && ident < 56) {
-    card_logo.style.backgroundImage = "url(./assets/mastercard.png)";
+function setCCLogo(e) {
+  const ident = parseInt(e.target.value.slice(0, 2));
+  const parsed = parseIIN(ident);
+  let image;
+  if (parsed === false) {
+    image = "";
   } else {
-    card_logo.style.backgroundImage = "";
+    image = `url(./assets/${parsed}.png)`;
+  }
+  card_logo.style.backgroundImage = image;
+}
+/**
+ * Get the credit card company based on first 2 digits of IIN
+ * @param {number} ident - Identifying digits of IIN
+ */
+function parseIIN(ident) {
+  if (ident === 34 || ident === 37) {
+    return "amex";
+  } else if (ident >= 40 && ident < 50) {
+    return "visa";
+  } else if (ident >= 50 && ident < 56) {
+    return "master";
+  } else {
+    return false;
   }
 }
+
+/**
+ * Check that the expiration date is after current date
+ *  and entered month is valid
+ */
 function checkExpiration() {
   const exp_yr = document.getElementsByName("cc-exp-YY");
   const exp_m = document.getElementsByName("cc-exp-MM");
@@ -41,6 +59,9 @@ function checkExpiration() {
   return false;
 }
 
+/**
+ * Parse the phone number input
+ */
 function parsePhone() {
   let phone = document.getElementsByName("cc-phone");
   if (phone === null) {
@@ -73,4 +94,4 @@ function validateCCInfo() {
   address = parseAddr(address);
 }
 
-cc_n.addEventListener("input", parseIIN);
+cc_n.addEventListener("input", setCCLogo);
