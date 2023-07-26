@@ -4,17 +4,6 @@ const per_info = document.getElementById("personal-info");
 const cc_n = document.getElementById("cc-num-in");
 const card_logo = document.getElementById("card-logo");
 
-function setCCLogo(e) {
-  const ident = parseInt(e.target.value.slice(0, 2));
-  const parsed = parseIIN(ident);
-  let image;
-  if (parsed === false) {
-    image = "";
-  } else {
-    image = `url(./assets/${parsed}.png)`;
-  }
-  card_logo.style.backgroundImage = image;
-}
 /**
  * Get the credit card company based on first 2 digits of IIN
  * @param {number} ident - Identifying digits of IIN
@@ -31,6 +20,20 @@ function parseIIN(ident) {
   }
 }
 
+/**
+ * set the credit card logo image
+ */
+function setCCLogo(e) {
+  const ident = parseInt(e.target.value.slice(0, 2));
+  const parsed = parseIIN(ident);
+  let image;
+  if (parsed === false) {
+    image = "";
+  } else {
+    image = `url(./assets/${parsed}.png)`;
+  }
+  card_logo.style.backgroundImage = image;
+}
 /**
  * Check that the expiration date is after current date
  *  and entered month is valid
@@ -90,8 +93,28 @@ function validateCCInfo() {
     console.log("invalid cc date");
     return;
   }
-  let address = document.getElementsByName("cc-addr");
-  address = parseAddr(address);
+  let address = document.getElementsByName("cc-addr")[0];
+  if (address === null) {
+    console.log("no elements with cc-addr name");
+    return;
+  }
+  address = address.value.match(/[0-9a-zA-Z\.\-\s]+/);
+  if (address === null) {
+    console.log("Invalid address string");
+    return;
+  }
+
+  let name = document.getElementsByName("cc-name")[0];
+  if (name === null) {
+    console.log("no elements with cc-name name");
+    return;
+  }
+  name = name.match(/[a-zA-Z\s\.\-]+/);
+
+  if (name === null) {
+    console.log("invalid name string");
+    return;
+  }
 }
 
 cc_n.addEventListener("input", setCCLogo);
