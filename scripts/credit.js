@@ -4,7 +4,8 @@ const per_info = document.getElementById("personal-info");
 const cc_n = document.getElementById("cc-num-in");
 const card_logo = document.getElementById("card-logo");
 const form = document.getElementById("cc-info-form");
-
+const same_check = document.getElementById("same");
+const billing = document.getElementById("cc-billing");
 /**
  * Get the credit card company based on first 2 digits of IIN
  * @param {number} ident - Identifying digits of IIN
@@ -18,6 +19,13 @@ function parseIIN(ident) {
     return "master";
   } else {
     return false;
+  }
+}
+function toggleBilling(_) {
+  if (billing.disabled) {
+    billing.disabled = false;
+  } else {
+    billing.disabled = true;
   }
 }
 
@@ -72,7 +80,7 @@ function parsePhone() {
     return false;
   }
   phone = phone[0].value;
-  const number = phone.match(/[0-9]{10}/);
+  const number = phone.match(/^[0-9]{10}$/);
   if (number === null) {
     return false;
   }
@@ -84,6 +92,7 @@ function parsePhone() {
  * Validate credit card info form and submit if valid
  */
 function validateCCInfo() {
+  //TODO:replace console.log() with some highlighting of invalid fields
   const phone = parsePhone();
   if (!phone) {
     return;
@@ -94,14 +103,21 @@ function validateCCInfo() {
     console.log("invalid cc date");
     return false;
   }
+
+  // check main address
   let address = document.getElementsByName("cc-addr")[0];
   if (address === null) {
     console.log("no elements with cc-addr name");
     return false;
   }
-  address = address.value.match(/[0-9a-zA-Z\.\-\s]+/);
+  address = address.value.match(/^[0-9a-zA-Z.\-\s]+$/);
   if (address === null) {
     console.log("Invalid address string");
+    return false;
+  }
+  // check billing address
+  const bill_addr = billing.value.match(/^[0-9a-zA-Z.\-\s]+$/);
+  if (bill_addr === null && bill_addr.disabled === false) {
     return false;
   }
 
@@ -120,6 +136,7 @@ function validateCCInfo() {
 }
 
 cc_n.addEventListener("input", setCCLogo);
+same_check.addEventListener("change", toggleBilling);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (validateCCInfo()) {
