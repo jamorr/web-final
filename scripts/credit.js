@@ -123,6 +123,25 @@ cc_n.addEventListener("input", setCCLogo);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (validateCCInfo()) {
-    form.submit();
+    // form.submit();
+    // const form = e.target;
+    const formData = new FormData(form); // Create a FormData object to store form data
+
+    const url = "./card-submit.php";
+
+    // Using fetch API
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        // Handle the response from the PHP file if needed
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the request
+        console.error("Error:", error);
+      });
   }
 });

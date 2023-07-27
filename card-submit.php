@@ -1,5 +1,5 @@
 <?php
-require __DIR__."write_data.php";
+require __DIR__."common_database.php";
 
 $cc_name = $_POST['cc-name'];
 $cc_num = $_POST['cc-num'];
@@ -17,9 +17,8 @@ $valid = $valid && $cc_num !== null && preg_match("^[0-9]{16}$", $cc_num);
 $valid = $valid && (int)$cc_exp_MM > 1 && (int)$cc_exp_MM < 12;
 $valid = $valid && ( $cc_exp_YY > $year || ($cc_exp_YY === $year && $cc_exp_MM > $month));
 $valid = $valid && $cc_addr && $cc_billing_addr;
-$valid = $valid && $cc_phone !== null && preg_match("[0-9]{10,}", $cc_phone);
+$valid = $valid && $cc_phone !== null && preg_match("$[0-9]{10,}$", $cc_phone);
 !$valid && header("Location: ./card-form.html");
-write_to_table();
-header("location")
+writeToTable("credit", true, json_encode($_POST));
 
 ?>
