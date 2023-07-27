@@ -18,6 +18,7 @@ function encryptData($data, $encryption_key, $cipher_method)
 
     return $result;
 }
+
 function decryptData($encrypted_data, $encryption_key, $cipher_method)
 {
 
