@@ -1,25 +1,20 @@
 
-//Sets global error flag
-let error = 0;
-
-
 
 function add_error(element,msg){
     let errordiv = document.createElement("div");
     errordiv.classList.add("error");
     errordiv.innerHTML = msg;
     element.insertAdjacentElement("beforebegin", errordiv);
-    error = 1;
 }
 //Main Function
 function validate(){
-//Checks to see if there's already an error, so that it can delete existing messages.
-if(error){
+    let error = 0;
+//Removes all error messages
     let errors = Array.from(document.getElementsByClassName("error"));
     errors.forEach(errorElement => {
         errorElement.remove();
     });
-}
+
 //Grabs information and stores in local variables
 var firstname = document.getElementById("firstname");
 var lastname = document.getElementById("lastname");
@@ -34,12 +29,12 @@ for(let i = 0;i<fields.length;i++){
     and adds an error message. It then adds it before the checked input field. */
 
     if(fields[i].value.length < 3){
-        add_error(fields[i],"Field must contain at least 3 characters")
+        add_error(fields[i],"Field must contain at least 3 characters");
+        error = 1;
     }
 }
 //Checks if passwords are the same
-if(!confirmpass){
-    alert("nuts");
+if(confirmpass() == false){
 error = 1;
 }
 //Checks names with regex
@@ -59,8 +54,6 @@ if(error){
     return false;
 }
 }
-
-
 
 
 function confirmpass(){
