@@ -6,9 +6,10 @@ $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
 $query = "SELECT * FROM Login WHERE email = $email;";
 $response = readFromTable($query, []);
-if ($response === "") {
+if (!$response) {
     echo "User not found";
 } elseif ($response['pass'] === $pass) {
+    //successful login
     $_SESSION['auth'] = true;
     $_SESSION['email'] = $email;
     if (!isset($_COOKIE['wishlist'])) {
@@ -19,12 +20,13 @@ if ($response === "") {
     }
     else {
         $_SESSION['new'] = false;
+ 
     }
+    header("Location: ./buyer_dash.php");   
 } else {
     echo "Incorrect password";
 }
 
 
-header("Location: ./buyer_dash.php");
 
 ?>
