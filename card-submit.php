@@ -6,10 +6,6 @@ $cc_num = $_POST['cc_num'];
 $cc_exp_MM = (int)$_POST['cc_exp_MM'];
 $cc_exp_YY = (int)$_POST['cc_exp_YY'];
 $cc_addr = $_POST['cc_addr'];
-// if ($_POST['same_addr']) {
-//     $_POST['cc_billing_addr'] = $_POST['cc_addr'];
-//     unset($_POST['same_addr']);
-// }
 $cc_billing_addr = $_POST['cc_billing_addr'];
 $cc_phone = $_POST['cc_phone'];
 
@@ -19,10 +15,11 @@ $valid = true;
 $valid = $valid && $cc_name !== null && preg_match("/^[a-z .\-,']+$/i", $cc_name);
 $valid = $valid && $cc_num !== null && preg_match("/^[0-9]{16}$/", $cc_num);
 $valid = $valid && (int)$cc_exp_MM > 1 && (int)$cc_exp_MM < 12;
-$valid = $valid && ( $cc_exp_YY > $year || ($cc_exp_YY === $year && $cc_exp_MM > $month));
+$valid = $valid && ($cc_exp_YY > $year || ($cc_exp_YY === $year && $cc_exp_MM >= $month));
 $valid = $valid && $cc_addr && $cc_billing_addr;
 $valid = $valid && $cc_phone !== null && preg_match("/^[0-9]{10,}$/", $cc_phone);
 $p = json_encode($_POST);
-error_log(print_r($p, true));
-$valid && writeToTable("credit", ["aes-256-abc", ["cc_num"]], json_encode($_POST));
+// $valid && writeToTable("credit", ["aes-256-cbc", ["cc_num"]], json_encode($_POST));
+$valid && writeToTable("Credit", [], json_encode($_POST));
+exit();
 ?>

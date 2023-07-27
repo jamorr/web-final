@@ -160,14 +160,25 @@ form.addEventListener("submit", (e) => {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (!response.ok) {
+          // If the response status code indicates an error (e.g., 500), handle the error
+          return response.json().then((data) => {
+            console.error("Error:", data.error);
+            // You can log the error or display it to the user as needed
+            // For example, show an error message to the user:
+            // showErrorToUser(data.error);
+          });
+        }
+        return response.text();
+      })
       .then((data) => {
-        // Handle the response from the PHP file if needed
-        console.log(data);
+        // Handle the successful response from the server if needed
+        console.log("Server response:", data);
       })
       .catch((error) => {
-        // Handle any errors that occurred during the request
-        console.error("Error:", error);
+        // Handle any other errors that may occur during the fetch request
+        console.error("Fetch error:", error);
       });
   }
 });
