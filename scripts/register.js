@@ -1,11 +1,19 @@
-// Function to add an error message
-function add_error(element, msg) {
-    let errordiv = document.createElement("div");
-    errordiv.classList.add("error");
-    errordiv.innerHTML = msg;
-    element.insertAdjacentElement("beforebegin", errordiv);
+
+    // Grabs information and stores it in local variables
+    var firstname = document.getElementById("firstname");
+    var lastname = document.getElementById("lastname");
+    var email = document.getElementById("email");
+    var pass = document.getElementById("pass");
+    var pass2 = document.getElementById("pass2");
+    const form = document.getElementById("form");
+
+
+function handleSubmit(event){
+event.preventDefault();
+validate();
 }
-const form = document.getElementById("form");
+form.addEventListener("submit", handleSubmit);
+
 // Main Validation Function
 function validate() {
     let error = 0; // Variable to track if there are any errors
@@ -16,12 +24,6 @@ function validate() {
         errorElement.remove();
     });
 
-    // Grabs information and stores it in local variables
-    var firstname = document.getElementById("firstname");
-    var lastname = document.getElementById("lastname");
-    var email = document.getElementById("email");
-    var pass = document.getElementById("pass");
-    var pass2 = document.getElementById("pass2");
 
     // Creates an array with all input fields
     const fields = [firstname, lastname, email, pass, pass2];
@@ -65,12 +67,38 @@ function validate() {
     let formdata  = new FormData(form);
     fetch(url,{
         method:"POST",
-
+        body: formdata,
     }
-
     )
-}
+    .then((response) => {
+        if (!response.ok) {
+          // If the response status code indicates an error (e.g., 500), handle the error
+          return response.json().then((data) => {
+            console.error("Error:", data.error);
+            let errormsg = "Error: " + data.error;
+            //Adds error above submit button
+            add_error(submit,errormsg);
+          });
+        }
+        return response.text();
+      })
+      .then((data) => {
+        // Handle the successful response from the server if needed
+        console.log("Server response:", data);
+      })
+      .catch((error) => {
+        // Handle any other errors that may occur during the fetch request
+        console.error("Fetch error:", error);
+      });
+  }
+  // Function to add an error message
 
+function add_error(element, msg) {
+    let errordiv = document.createElement("div");
+    errordiv.classList.add("error");
+    errordiv.innerHTML = msg;
+    element.insertAdjacentElement("beforebegin", errordiv);
+}
 // Function to confirm if passwords match
 function confirmpass() {
     let pass = document.getElementById("pass").value;

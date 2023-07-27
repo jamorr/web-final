@@ -8,14 +8,17 @@ function getEnvVars()
     return $f;
 }
 
-// $host = "localhost";
-// $user = "agrizzle3";
-// $pass = "agrizzle3";
-// $dbname = "agrizzle3";
+
 function writeToTable(string $table, bool $encrypt, $data)
 {
-    $table_vars = getEnvVars();
-    $conn = new mysqli($table_vars[0], $table_vars[1], $table_vars[1], $table_vars[1]);
+    $host = "localhost";
+    $user = "jfassett1";
+    $pass = "jfassett1";
+    $dbname = "jfassett1";
+
+    //$table_vars = getEnvVars();
+    // $conn = new mysqli($table_vars[0], $table_vars[1], $table_vars[1], $table_vars[1]); 
+    $conn = new mysqli($host,$user,$pass,$dbname);
     if ($conn->connect_error) {
         echo "Could not connect to server\n";
         die("Connection failed: " . $conn->connect_error);
