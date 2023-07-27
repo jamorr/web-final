@@ -38,20 +38,6 @@
         </div>
       </div>
     </main>
-    <script>
-      function autoScroll() {
-        var carousel = document.querySelector(".carousel");
-        var slides = carousel.querySelectorAll(".slide");
-        var currentSlide = 0;
-
-        setInterval(function () {
-          currentSlide = (currentSlide + 1) % slides.length;
-          carousel.style.left = -currentSlide * 1000;
-        }, 3000);
-      }
-
-      window.addEventListener("load", autoScroll);
-    </script>
     <footer>&copy; 2023 nestXchange</footer>
   </body>
 </html>
