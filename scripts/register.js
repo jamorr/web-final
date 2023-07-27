@@ -5,7 +5,7 @@ function add_error(element, msg) {
     errordiv.innerHTML = msg;
     element.insertAdjacentElement("beforebegin", errordiv);
 }
-
+const form = document.getElementById("form");
 // Main Validation Function
 function validate() {
     let error = 0; // Variable to track if there are any errors
@@ -59,6 +59,16 @@ function validate() {
     if (error) {
         return false; // Validation failed, prevent form submission.
     }
+
+    //If everything's good, start submission using fetch
+    const url = "./register-submit.php";
+    let formdata  = new FormData(form);
+    fetch(url,{
+        method:"POST",
+
+    }
+
+    )
 }
 
 // Function to confirm if passwords match
