@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Credit Card Entry</title>
+    <style>
+      fieldset {
+        display: inline;
+      }
+      .label-div {
+        min-width: 10rem;
+        float: left;
+        text-align: right;
+        padding-right: 2rem;
+      }
+
+      #card-logo {
+        height: 30px;
+        width: 60px;
+        background-size: 100% 100%;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="./card-submit.php" method="post" id="cc-info-form">
+      <fieldset id="card-info">
+        <!-- CC Name -->
+        <div class="label-div">Name on card</div>
+        <input
+          type="text"
+          name="cc-name"
+          value=""
+          pattern="^[a-zA-Z .\-,']+$"
+          title="Allowed characters: a-z , ' -"
+        />
+        <!-- CC number -->
+        <br /><br />
+        <div class="label-div">Card number</div>
+        <input
+          type="text"
+          name="cc-num"
+          maxlength="16"
+          value=""
+          id="cc-num-in"
+          pattern="[0-9]{16}"
+          title="Card number must be 16 digits and may not contain non numeric characters"
+        />
+        <!-- CC Expiration -->
+        <br /><br />
+        <div class="label-div">Expiration</div>
+        <input
+          type="text"
+          name="cc-exp-MM"
+          size="2"
+          value=""
+          placeholder="MM"
+          pattern="(0?[1-9]|[10-12])"
+          title="Enter a valid month"
+        />
+        /
+        <input
+          type="text"
+          name="cc-exp-YY"
+          size="2"
+          value=""
+          placeholder="YY"
+          pattern="[0-9]{2}"
+        />
+        <div id="card-logo"></div>
+      </fieldset>
+      <br />
+      <fieldset id="personal-info">
+        <!-- address -->
+        <div class="label-div">Address</div>
+        <input type="text" name="cc-addr" value="" />
+        <br /><br />
+
+        <div class="label-div">Billing Address</div>
+
+        <input type="text" name="cc-billing-addr" value="" />
+        <br /><br />
+        <!-- phone number  -->
+        <div class="label-div">Phone Number</div>
+        <input
+          type="tel"
+          name="cc-phone"
+          value=""
+          pattern="[0-9]{10,}"
+          title="Phone number must be at least 10 digits long."
+        />
+      </fieldset>
+
+      <!-- submit button -->
+      <input type="submit" name="submission" value="Submit" />
+    </form>
+    <script src="./scripts/credit.js"></script>
+  </body>
+</html>
