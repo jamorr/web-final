@@ -2,40 +2,57 @@
     <head>
         <title>Registration</title>
 
+    <style>
+
+    .error{
+    color:red;
+
+    } 
+    #pass-error{
+    color:red;
+
+    }   
+    </style>
     </head>
 <body>
 <h1>Registration Page</h1>
-<fieldset>
-<form action = "register-submit.php" method= "post">
-    <strong>Firstname</strong>
-    <input type = "text" name = "firstname">
-    <br>
-    <strong>Lastname</strong>
-    <input type = "text" name = "lastname">
-    <br>
-    <strong>Email Address:</strong>
-    <input type = "text" name = "email">
-    <br>
-    <strong>Password</strong>
-    <input type = "text" name = "pass">
-    <br>
-    <strong>Confirm Password</strong>
-    <input type = "text" name = "pass2">
-    <br>
-    <input type = "submit"></button>
-
-
-
-
-
-
-
+<fieldset><form action="register-submit.php" method="post" onsubmit="return validate()">
+    <table>
+        <tr>
+            <td><strong>Firstname:</strong></td>
+            <td><input type="text" name="firstname" id="firstname"></td>
+        </tr>
+        <tr>
+            <td><strong>Lastname:</strong></td>
+            <td><input type="text" name="lastname" id="lastname"></td>
+        </tr>
+        <tr>
+            <td><strong>Email Address:</strong></td>
+            <td><input type="email" name="email" id="email"></td>
+        </tr>
+        <tr>
+            <td><strong>Password:</strong></td>
+            <td><input type="password" name="pass" id="pass"></td>
+        </tr>
+        <tr>
+            <td><strong>Confirm Password:</strong></td>
+            <td>
+                <input type="password" name="pass2" id="pass2" onchange="confirmpass()">
+                <div id="pass-error"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit"></td>
+        </tr>
+    </table>
 </form>
+
 </fieldset>
 
 
-<script src = "register.js"></script>
 </body>
+<script src = "register.js"></script>
+
 
 
 
