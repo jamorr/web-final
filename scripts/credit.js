@@ -3,6 +3,7 @@ const cc_info = document.getElementById("card-info");
 const per_info = document.getElementById("personal-info");
 const cc_n = document.getElementById("cc-num-in");
 const card_logo = document.getElementById("card-logo");
+const form = document.getElementById("cc-info-form");
 
 /**
  * Get the credit card company based on first 2 digits of IIN
@@ -91,30 +92,37 @@ function validateCCInfo() {
   const valid_date = checkExpiration();
   if (!valid_date) {
     console.log("invalid cc date");
-    return;
+    return false;
   }
   let address = document.getElementsByName("cc-addr")[0];
   if (address === null) {
     console.log("no elements with cc-addr name");
-    return;
+    return false;
   }
   address = address.value.match(/[0-9a-zA-Z\.\-\s]+/);
   if (address === null) {
     console.log("Invalid address string");
-    return;
+    return false;
   }
 
   let name = document.getElementsByName("cc-name")[0];
   if (name === null) {
     console.log("no elements with cc-name name");
-    return;
+    return false;
   }
-  name = name.match(/[a-zA-Z\s\.\-]+/);
+  name = name.value.match(/^[a-zA-Z\s\.\-\,\']+$/);
 
   if (name === null) {
     console.log("invalid name string");
-    return;
+    return false;
   }
+  return true;
 }
 
 cc_n.addEventListener("input", setCCLogo);
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (validateCCInfo()) {
+    form.submit();
+  }
+});
