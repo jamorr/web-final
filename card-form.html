@@ -29,7 +29,7 @@
         <div class="label-div">Name on card</div>
         <input
           type="text"
-          name="cc-name"
+          name="cc_name"
           value=""
           pattern="^[a-zA-Z .\-,']+$"
           title="Allowed characters: a-z , ' -"
@@ -39,7 +39,7 @@
         <div class="label-div">Card number</div>
         <input
           type="text"
-          name="cc-num"
+          name="cc_num"
           maxlength="16"
           value=""
           id="cc-num-in"
@@ -51,17 +51,17 @@
         <div class="label-div">Expiration</div>
         <input
           type="text"
-          name="cc-exp-MM"
+          name="cc_exp_MM"
           size="2"
           value=""
           placeholder="MM"
-          pattern="(0?[1-9]|[10-12])"
+          pattern="(0?[1-9]|1[12])"
           title="Enter a valid month"
         />
         /
         <input
           type="text"
-          name="cc-exp-YY"
+          name="cc_exp_YY"
           size="2"
           value=""
           placeholder="YY"
@@ -73,18 +73,23 @@
       <fieldset id="personal-info">
         <!-- address -->
         <div class="label-div">Address</div>
-        <input type="text" name="cc-addr" value="" />
+        <input type="text" name="cc_addr" value="" id="address" />
         <br /><br />
 
+        <div style="float: right">
+          <input type="checkbox" id="same" />
+          Same as address
+        </div>
+        <br />
         <div class="label-div">Billing Address</div>
 
-        <input type="text" name="cc-billing-addr" value="" />
+        <input type="text" name="cc_billing_addr" value="" id="cc-billing" />
         <br /><br />
         <!-- phone number  -->
         <div class="label-div">Phone Number</div>
         <input
           type="tel"
-          name="cc-phone"
+          name="cc_phone"
           value=""
           pattern="[0-9]{10,}"
           title="Phone number must be at least 10 digits long."
