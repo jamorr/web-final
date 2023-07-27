@@ -49,6 +49,7 @@ function validate() {
   return true;
 }
 
+const email = document.getElementById("email");
 const form = document.getElementById("login-form");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -61,6 +62,6 @@ form.addEventListener("submit", (e) => {
     method: "POST",
     body: formData,
   }).then((data) => {
-    add_error(input, "Invalid username or pass");
+    add_error(email, "Invalid username or pass");
   });
 });
