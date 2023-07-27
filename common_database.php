@@ -8,9 +8,9 @@ function getEnvVars()
     return $f;
 }
 // Encryption function using OpenSSL
-function encryptData($data, $encryption_key)
+function encryptData($data, $encryption_key, $cipher_method)
 {
-    $cipher_method = 'aes-256-cbc';
+    // $cipher_method = 'aes-256-cbc';
     $iv_length = openssl_cipher_iv_length($cipher_method);
     $iv = openssl_random_pseudo_bytes($iv_length);
 
@@ -19,6 +19,9 @@ function encryptData($data, $encryption_key)
 
     return $result;
 }
+
+// $encrypt is array who's first value is the encrytion type
+// and second is an assoc array whos keys are table columns to encrypt
 function writeToTable(string $table, array $encrypt, $data)
 {
     $table_vars = getEnvVars();
@@ -35,8 +38,8 @@ function writeToTable(string $table, array $encrypt, $data)
     $val_str = "";
     foreach ($decoded as $key => $value) {
             $key_str .= $key.",";
-        if (key_exists($key, $encrypt[1])) {
-            $val_str .= "'".encryptData($value, $table_vars[2])."',";
+        if ($encrypt && key_exists($key, $encrypt[1])) {
+            $val_str .= "'".encryptData($value, $table_vars[2], $encrypt[0])."',";
         }else {
 
             $val_str .= "'".$value."',";

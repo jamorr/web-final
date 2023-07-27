@@ -18,6 +18,6 @@ $valid = $valid && (int)$cc_exp_MM > 1 && (int)$cc_exp_MM < 12;
 $valid = $valid && ( $cc_exp_YY > $year || ($cc_exp_YY === $year && $cc_exp_MM > $month));
 $valid = $valid && $cc_addr && $cc_billing_addr;
 $valid = $valid && $cc_phone !== null && preg_match("$[0-9]{10,}$", $cc_phone);
-$valid && writeToTable("credit", ["sha"], json_encode($_POST));
+$valid && writeToTable("credit", ["aes-256-abc", ["cc-num"]], json_encode($_POST));
 
 ?>
