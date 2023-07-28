@@ -1,10 +1,18 @@
-// Function to add an error message
-function add_error(element, msg) {
-    let errordiv = document.createElement("div");
-    errordiv.classList.add("error");
-    errordiv.innerHTML = msg;
-    element.insertAdjacentElement("beforebegin", errordiv);
+
+    // Grabs information and stores it in local variables
+    var firstname = document.getElementById("firstname");
+    var lastname = document.getElementById("lastname");
+    var email = document.getElementById("email");
+    var pass = document.getElementById("pass");
+    var pass2 = document.getElementById("pass2");
+    const form = document.getElementById("form");
+
+
+function handleSubmit(event){
+event.preventDefault();
+validate();
 }
+form.addEventListener("submit", handleSubmit);
 
 // Main Validation Function
 function validate() {
@@ -16,12 +24,6 @@ function validate() {
         errorElement.remove();
     });
 
-    // Grabs information and stores it in local variables
-    var firstname = document.getElementById("firstname");
-    var lastname = document.getElementById("lastname");
-    var email = document.getElementById("email");
-    var pass = document.getElementById("pass");
-    var pass2 = document.getElementById("pass2");
 
     // Creates an array with all input fields
     const fields = [firstname, lastname, email, pass, pass2];
@@ -59,8 +61,48 @@ function validate() {
     if (error) {
         return false; // Validation failed, prevent form submission.
     }
-}
 
+    //If everything's good, start submission using fetch
+    const url = "./register-submit.php";
+    let formdata  = new FormData(form);
+    fetch(url, {
+        method: "POST",
+        body: formdata,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            // If the response status code indicates an error (e.g., 500), handle the error
+            return response.json().then((data) => {
+              console.error("Error:", data.error);
+              // You can log the error or display it to the user as needed
+              // For example, show an error message to the user:
+              // showErrorToUser(data.error);
+              return Promise.reject(data.error); // Return a rejected Promise to trigger the catch block
+            });
+          }
+          return response.text();
+        })
+        .then((data) => {
+            console.log("Server response:", data);
+            data = JSON.parse(data);
+          // Handle the successful response from the server if needed
+          if(!data["success"]){
+            add_error(firstname,String(data["error"]));
+          }
+          else{
+        //Success message
+
+          }
+        })
+    };
+  // Function to add an error message
+
+function add_error(element, msg) {
+    let errordiv = document.createElement("div");
+    errordiv.classList.add("error");
+    errordiv.innerHTML = msg;
+    element.insertAdjacentElement("beforebegin", errordiv);
+}
 // Function to confirm if passwords match
 function confirmpass() {
     let pass = document.getElementById("pass").value;
