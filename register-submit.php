@@ -23,13 +23,11 @@ if ($conn->connect_error) {
 
 
 
-//Password encryption
+//Password hashing
 $secure_pass = password_hash($_POST["pass"], PASSWORD_DEFAULT);
 //Preparing SQL statement before executing insert (this prevents SQL injection)
 $stmt = $conn->prepare("INSERT INTO user_info (first_name, last_name, email, password)
         VALUES (?, ?, ?, ?)");
-print_r($_POST);
-
 $stmt->bind_param("ssss", $_POST['firstname'], $_POST['lastname'], $_POST['email'], $secure_pass);
 $stmt->execute();
 
@@ -42,6 +40,6 @@ if ($stmt->error) {
 }
 
 $stmt->close();
-echo json_encode($response);
 
+echo json_encode($response);
 ?>

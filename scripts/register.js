@@ -65,32 +65,36 @@ function validate() {
     //If everything's good, start submission using fetch
     const url = "./register-submit.php";
     let formdata  = new FormData(form);
-    fetch(url,{
-        method:"POST",
+    fetch(url, {
+        method: "POST",
         body: formdata,
-    }
-    )
-    .then((response) => {
-        if (!response.ok) {
-          // If the response status code indicates an error (e.g., 500), handle the error
-          return response.json().then((data) => {
-            console.error("Error:", data.error);
-            let errormsg = "Error: " + data.error;
-            //Adds error above submit button
-            add_error(submit,errormsg);
-          });
-        }
-        return response.text();
       })
-      .then((data) => {
-        // Handle the successful response from the server if needed
-        console.log("Server response:", data);
-      })
-      .catch((error) => {
-        // Handle any other errors that may occur during the fetch request
-        console.error("Fetch error:", error);
-      });
-  }
+        .then((response) => {
+          if (!response.ok) {
+            // If the response status code indicates an error (e.g., 500), handle the error
+            return response.json().then((data) => {
+              console.error("Error:", data.error);
+              // You can log the error or display it to the user as needed
+              // For example, show an error message to the user:
+              // showErrorToUser(data.error);
+              return Promise.reject(data.error); // Return a rejected Promise to trigger the catch block
+            });
+          }
+          return response.text();
+        })
+        .then((data) => {
+            console.log("Server response:", data);
+            data = JSON.parse(data);
+          // Handle the successful response from the server if needed
+          if(!data["success"]){
+            add_error(firstname,String(data["error"]));
+          }
+          else{
+        //Success message
+
+          }
+        })
+    };
   // Function to add an error message
 
 function add_error(element, msg) {
