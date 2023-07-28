@@ -24,11 +24,9 @@ function get_images(id) {
 
 // Open the modal image gallery.
 function open_gallery() {
-
 	slide_index = 0;
 	show_slide();
 	document.getElementById("gallery").style.display = "block";
-
 }
 
 // Close the modal image gallery.
@@ -38,7 +36,6 @@ function close_gallery() {
 
 // Go to the next/previous image.
 function change_image(n) {
-
 	show_slide(slide_index += n);
 }
 
@@ -57,4 +54,3 @@ document.getElementById("gallery").onclick = function(e) {
 	if(e.target == document.getElementById("gallery"))
 		close_gallery();
 }
-

@@ -28,6 +28,9 @@
 					<?= $listing["city"] ?>, <?= $listing["state_abbrev"] ?> <?= $listing["zip"] ?> 
 				</div>
 			</div>
+			<div id="back_button" onclick="history.back()">
+				&larr; Back to dashboard
+			</div>
 		</div>
 		
 		<!-- Additional details and wish list button -->

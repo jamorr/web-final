@@ -44,11 +44,12 @@ body {
 #listing_details {
 	width: 1260px;
 	margin: auto;
-	margin-top: 30px;
+	margin-top: 50px;
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px #ddd;
 	display: flex;
 	overflow: hidden;
+	position: relative;
 }
 #listing_details img {
 	width: 960px;
@@ -161,6 +162,21 @@ body {
 #lc_wish_list:hover {
 	background: gold;
 	transition: 0.5s ease;
+	cursor: pointer;
+}
+#back_button {
+	font-weight: bold;
+	padding: 15px;
+	border-radius: 0 0 5px 5px;
+	background-color: #ddd;
+	transition: 0.3s ease;
+	position: absolute;
+	top: 0;
+	left: 20px;
+}
+#back_button:hover {
+	background-color: #fff;
+	transition: 0.3s ease;
 	cursor: pointer;
 }
 
