@@ -69,18 +69,23 @@ function load_listings() {
   // Store the current offset, then move it forward by one row.
   const current_offset = offset;
   offset += limit;
-
-  // Send GET request to PHP file with current offset.
-  const xhr = new XMLHttpRequest();
-  xhr.open(
-    "GET",
-    `read_listings.php?offset=${current_offset}&limit=${limit}${search_terms}`
-  );
-  xhr.onload = function () {
-    // Check the server response.
-    if (xhr.status === 200) {
-      // Parse the listings data.
-      const listings_data = JSON.parse(xhr.responseText);
+  const url = new URL("read_listings.php", window.location.origin);
+  url.searchParams.append("offset", current_offset);
+  url.searchParams.append("limit", limit);
+  if (search_filters) {
+    Object.keys(search_filters).forEach((key) => {
+      url.searchParams.append(key, search_filters[key]);
+    });
+  }
+  // Send GET request with the constructed URL.
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((listings_data) => {
       if (listings_data.length > 0) {
         // Create a new card for each listing.
         listings_data.forEach((listing) => {
@@ -89,9 +94,30 @@ function load_listings() {
           card_container.appendChild(card);
         });
       }
-    }
-  };
-  xhr.send();
+    })
+    .catch((error) => {
+      // Handle errors that occurred during fetch
+      console.error("Fetch error:", error);
+    });
+  // Send GET request to PHP file with current offset.
+  // const xhr = new XMLHttpRequest();
+  // xhr.open("GET", url);
+  // xhr.onload = function () {
+  //   // Check the server response.
+  //   if (xhr.status === 200) {
+  //     // Parse the listings data.
+  //     const listings_data = JSON.parse(xhr.responseText);
+  //     if (listings_data.length > 0) {
+  //       // Create a new card for each listing.
+  //       listings_data.forEach((listing) => {
+  //         const card = document.createElement("div", { is: "listing-card" });
+  //         card.addData(listing);
+  //         card_container.appendChild(card);
+  //       });
+  //     }
+  //   }
+  // };
+  // xhr.send();
 }
 
 // Check if the bottom of the page has been reached.
@@ -102,22 +128,11 @@ function check_scroll() {
 
 // Clear the existing listing cards and
 function search() {
-  search_terms = "";
-  if (query.value !== "") search_terms += `&query=${query.value}`;
-  if (min_price.value !== "") search_terms += `&min_price=${min_price.value}`;
-  if (max_price.value !== "") search_terms += `&max_price=${max_price.value}`;
-  if (min_bed.value !== "") search_terms += `&min_bed=${min_bed.value}`;
-  if (max_bed.value !== "") search_terms += `&max_bed=${max_bed.value}`;
-  if (min_bath.value !== "") search_terms += `&min_bath=${min_bath.value}`;
-  if (max_bath.value !== "") search_terms += `&max_bath=${max_bath.value}`;
-  if (min_floor_area.value !== "")
-    search_terms += `&min_floor_area=${min_floor_area.value}`;
-  if (max_floor_area.value !== "")
-    search_terms += `&max_floor_area=${max_floor_area.value}`;
-  if (min_lot_area.value !== "")
-    search_terms += `&min_lot_area=${min_lot_area.value}`;
-  if (max_lot_area.value !== "")
-    search_terms += `&max_lot_area=${max_lot_area.value}`;
+  search_filters = {};
+  element_ids.forEach((element) => {
+    const doc = document.getElementById(element);
+    if (doc.value !== "") search_filters[element] = doc.value;
+  });
   card_container.innerHTML = "";
   offset = 0;
 
@@ -129,17 +144,20 @@ function search() {
 
 // Set variables for the listing card container and search form elements.
 const card_container = document.getElementById("listing_cards");
-const query = document.getElementById("query");
-const min_price = document.getElementById("min_price");
-const max_price = document.getElementById("max_price");
-const min_bed = document.getElementById("min_bed");
-const max_bed = document.getElementById("max_bed");
-const min_bath = document.getElementById("min_bath");
-const max_bath = document.getElementById("max_bath");
-const min_floor_area = document.getElementById("min_floor_area");
-const max_floor_area = document.getElementById("max_floor_area");
-const min_lot_area = document.getElementById("min_lot_area");
-const max_lot_area = document.getElementById("max_lot_area");
+const element_ids = [
+  "query",
+  "min_price",
+  "max_price",
+  "min_bed",
+  "max_bed",
+  "min_bath",
+  "max_bath",
+  "min_floor_area",
+  "max_floor_area",
+  "min_lot_area",
+  "max_lot_area",
+];
+let search_filters = {};
 
 const search_button = document.getElementById("search");
 search_button.addEventListener("click", function () {
@@ -151,7 +169,6 @@ customElements.define("listing-card", Listing, { extends: "div" });
 
 let offset = 0; // Set the row offset.
 const limit = 3; // Set the number of rows to get.
-let search_terms = ""; // Optional suffix for GET request URL.
 
 // Add a listener for scroll event.
 window.addEventListener("scroll", check_scroll);
