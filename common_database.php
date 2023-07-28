@@ -32,7 +32,7 @@ function decryptData($encrypted_data, $encryption_key, $cipher_method)
 
 function initConnection($table_vars)
 {
-    file_put_contents("./db.log", print_r(getEnvVars(), true));
+    //file_put_contents("./db.log", print_r(getEnvVars(), true));
     $conn = new mysqli($table_vars[0], $table_vars[1], $table_vars[1], $table_vars[1]);
     if ($conn->connect_error) {
         echo "Could not connect to server\n";
@@ -43,12 +43,12 @@ function initConnection($table_vars)
 
     // $encrypt is array who's first value is the encrytion type
     // and second is an assoc array whos keys are table columns to encrypt
-function writeToTable(string $table, array $encrypt, $data)
+function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
 {
     try {
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "jmorris116", "batman"];
+            $table_vars = ["localhost", "jfassett1", "batman"];
         }
 
         $conn = initConnection($table_vars);
@@ -64,10 +64,26 @@ function writeToTable(string $table, array $encrypt, $data)
                 $val_str .= "'" . $conn->real_escape_string($value) . "',"; 
             }
         }
+        
         $key_str = rtrim($key_str, ",");
         $val_str = rtrim($val_str, ",");
-        $conn->query("INSERT INTO $table ($key_str) VALUES ($val_str)");  
+        // $numvals = count($decoded);
+        // $placeholders = rtrim(str_repeat("?,", $numvals), ',');
+        $values = array_values((array) $decoded);
+        // print_r($values);
+        // echo $values;
+        $stmt = $conn->prepare($bind);  
+        $stmt->bind_param($param_types, ...$values);
+        $stmt->execute();
+        if ($stmt->error) {
+            // If there was an error with the SQL execution, send an error response
+            $response = ["success" => false, "error" => $stmt->error];
+        } else {
+            // SQL executed successfully, send a success response
+            $response = ["success" => true, "message" => "Registration successful!"];
+        }
         $conn->close();
+       echo json_encode($response);
     } catch (Exception $e) {
         // Log the error (optional)
         error_log($e->getMessage());
@@ -81,19 +97,14 @@ function writeToTable(string $table, array $encrypt, $data)
 function readFromTable(string $query, array $encrypted)
 {
     try {
-        file_put_contents("./db.log", print_r(getEnvVars(), true));
+        // file_put_contents("./db.log", print_r(getEnvVars(), true));
     
-        $table_vars = getEnvVars();
+        // $table_vars = getEnvVars();
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "agrizzle3", "batman"];
+            $table_vars = ["localhost", "jfassett1", "batman"];
         }
-        $conn = new mysqli($table_vars[0], $table_vars[1], $table_vars[1], $table_vars[1]);
-        if ($conn->connect_error) {
-            echo "Could not connect to server\n";
-            die("Connection failed: " . $conn->connect_error);
-        }
-
+        $conn = initConnection($table_vars);
         $data = $conn->query($query);
         $output = [];
         while ($row = $data->fetch_assoc()) {
@@ -102,8 +113,8 @@ function readFromTable(string $query, array $encrypted)
             }
             array_push($output, $row);
         }
-        echo json_encode($output);
         $conn->close();
+        return json_encode($output);
     } catch (Exception $e) {
         // Log the error (optional)
         error_log($e->getMessage());
