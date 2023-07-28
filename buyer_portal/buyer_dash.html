@@ -19,9 +19,8 @@
         cursor: pointer;
         text-transform: none;
         white-space: nowrap;
-        margin: 0;
+        margin-top: 20px;
         border-style: none;
-        padding: 0;
       }
       .accordion-button:hover {
         color: #000 !important;
@@ -52,7 +51,8 @@
     <!-- Search elements -->
     <div id="search_container">
       <label for="query">Search:</label>
-      <input type="text" id="query" /><br />
+      <input type="text" id="query" />
+      <button id="search">Search</button>
 
       <button type="button" class="accordion-button" onclick="showDropdown();">
         Advanced Filters
@@ -79,8 +79,6 @@
         <input type="text" id="min_lot_area" placeholder="min" />
         <input type="text" id="max_lot_area" placeholder="max" /><br />
       </div>
-
-      <button id="search">Search</button>
     </div>
 
     <!-- Listing cards -->
