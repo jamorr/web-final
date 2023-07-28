@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Login Page</title>
-<style>
-    .error{
-        color:red;
-        font-weight:bold;
-    
-        } 
-</style>
-</head>
+  <head>
+    <title>Login Page</title>
+    <style>
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
 
-<body>
-<h1>Welcome! Login here</h1>
-<br><br>
-<fieldset>
-<form method = "post" onsubmit = "return validate()">
-<table>
-    <tr>
-        <td><strong>Email Address:</strong></td>
-        <td><input type="email" name="email" id="email"></td>
-    </tr>
-    <tr>
-        <td><strong>Password:</strong></td>
-        <td><input type="password" name="pass" id="pass"></td>
-    </tr>
-    <tr>
-        <td><input type = "submit"></td>
-    </tr>
-</table>
-</form>
-<br>
-<a href = 'register.html'>Don't have an account? Sign up here!</a>
-</fieldset>
-</body>
-<script src = "scripts/login.js"></script>
-
+  <body>
+    <h1>Welcome! Login here</h1>
+    <br /><br />
+    <fieldset>
+      <form method="post" action="login-auth.php" id="login-form">
+        <table>
+          <tr>
+            <td><strong>Email Address:</strong></td>
+            <td><input type="email" name="email" id="email" /></td>
+          </tr>
+          <tr>
+            <td><strong>Password:</strong></td>
+            <td><input type="password" name="pass" id="pass" /></td>
+          </tr>
+          <tr>
+            <td><input type="submit" /></td>
+          </tr>
+        </table>
+      </form>
+      <br />
+      <a href="register.html">Don't have an account? Sign up here!</a>
+    </fieldset>
+  </body>
+  <script src="scripts/login.js"></script>
 </html>
