@@ -50,7 +50,7 @@
 				Listed for <?=
 				round((time() - strtotime($listing["date_listed"])) / 86400); ?> days
 			</div>
-			<div id="lc_wish_list">
+			<div id="lc_wish_list" onclick="alert('test')";>
 				<img src="assets/star.png"><br>
 				Add to wish list
 			</div>

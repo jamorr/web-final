@@ -50,7 +50,7 @@ function show_slide() {
 	slides[slide_index].style.display = "block";
 }
 
-document.getElementById("gallery").onclick = function(e) {
+document.getElementById("gallery").onclick = function (e) {
 	if(e.target == document.getElementById("gallery"))
 		close_gallery();
 }

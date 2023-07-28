@@ -4,15 +4,31 @@ class Listing extends HTMLDivElement {
     this.classList.add("listing");
   }
   addData(data) {
-    // Link the card to the listing page.
-    this.addEventListener("click", function () {
-      window.location.href = `listing.php?id=${data.id}`;
-    });
-
     // Add the main image.
     const main_image = new Image();
     main_image.src = `assets/${data.id}/main.webp`;
     this.appendChild(main_image);
+
+	// Add the wish list button.
+	const wl_button = document.createElement("div");
+	wl_button.classList.add("wl_button");
+	wl_button.addEventListener("click", function () {
+		// Add the listing to the wish list here.
+		alert("test");
+	});
+	const wl_icon = new Image();
+	wl_icon.src = "assets/star.png"
+	wl_button.appendChild(wl_icon);
+	this.appendChild(wl_button);
+	
+	// Link the card to the listing page.
+	if (document.querySelector('#elementSelector:hover')) {
+		alert('I like it when you touch me!');
+	}
+    this.addEventListener("click", function (e) {
+		if(e.target != wl_button) {}
+			window.location.href = `listing.php?id=${data.id}`;
+    });
 
     // Add the price.
     const price = document.createElement("div");
@@ -99,25 +115,6 @@ function load_listings() {
       // Handle errors that occurred during fetch
       console.error("Fetch error:", error);
     });
-//   Send GET request to PHP file with current offset.
-//   const xhr = new XMLHttpRequest();
-//   xhr.open("GET", url);
-//   xhr.onload = function () {
-//     // Check the server response.
-//     if (xhr.status === 200) {
-//       // Parse the listings data.
-//       const listings_data = JSON.parse(xhr.responseText);
-//       if (listings_data.length > 0) {
-//         // Create a new card for each listing.
-//         listings_data.forEach((listing) => {
-//           const card = document.createElement("div", { is: "listing-card" });
-//           card.addData(listing);
-//           card_container.appendChild(card);
-//         });
-//       }
-//     }
-//   };
-//   xhr.send();
 }
 
 // Check if the bottom of the page has been reached.
