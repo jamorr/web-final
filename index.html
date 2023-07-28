@@ -44,11 +44,11 @@
                 <table>
                   <tr>
                     <td><strong>Email Address:</strong></td>
-                    <td><input type="email" name="email" id="email" /></td>
+                    <td><input type="email" name="l_email" id="l_email" /></td>
                   </tr>
                   <tr>
                     <td><strong>Password:</strong></td>
-                    <td><input type="password" name="pass" id="pass" /></td>
+                    <td><input type="password" name="l_pass" id="l_pass" /></td>
                   </tr>
                   <tr>
                     <td><input type="submit" /></td>
@@ -62,10 +62,8 @@
             <h1>Register</h1>
             <fieldset>
               <form
-                action="register-submit.php"
-                method="post"
-                onsubmit="return validate()"
-              >
+                id = "reg-form"
+                method="post"              >
                 <table>
                   <tr>
                     <td><strong>Firstname:</strong></td>

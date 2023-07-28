@@ -11,7 +11,7 @@ function add_error(element, msg) {
 }
 
 // Function to validate the form inputs
-function validate() {
+function validatelogin() {
   // Log a message to indicate that the validation function is called
   console.log("Validation function called.");
 
@@ -23,11 +23,11 @@ function validate() {
   });
 
   // Get references to the email and password input elements
-  const email = document.getElementById("email");
-  const pass = document.getElementById("pass");
+  const l_email = document.getElementById("l_email");
+  const l_pass = document.getElementById("l_pass");
 
   // Create an array containing the input elements for easier iteration
-  const fields = [email, pass];
+  const fields = [l_email, l_pass];
 
   // Loop through each input element and check for validation errors
   fields.forEach((input) => {
@@ -49,19 +49,19 @@ function validate() {
   return true;
 }
 
-const email = document.getElementById("email");
-const form = document.getElementById("login-form");
-form.addEventListener("submit", (e) => {
+const l_email = document.getElementById("l_email");
+const loginform = document.getElementById("login-form");
+loginform.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (!validate()) {
+  if (!validatelogin()) {
     return;
   }
-  const formData = new FormData(form);
+  const formData = new FormData(loginform);
   const url = "login-auth.php";
   fetch(url, {
     method: "POST",
     body: formData,
   }).then((data) => {
-    add_error(email, "Invalid username or pass");
+    add_error(l_email, "Invalid username or pass");
   });
 });
