@@ -4,48 +4,64 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="styles/style.css">
 		<title>Listing Details</title>
-		<script src="scripts/lightbox.js"></script>
 		<?php require_once 'read_listing_details.php';?>
 	</head>
 	<body>
-		
-		<!-- Modal image gallery -->
-		<div id="gallery" class="modal">
-			<span class="close" onclick="close_gallery()">&times;</span>
-			<div class="modal-content">
-				<div class="mySlides">
-					<div class="numbertext">1 / 4</div>
-					<img src="assets/<?= $listing["id"] ?>/1.webp" style="width:100%">
+		<!-- Main listing image and details -->
+		<div id="listing_details">
+			<img src="assets/<?= $listing["id"] ?>/main.webp" onclick="open_gallery()">
+			<div id="ld_text">
+				<div id="ld_price">$<?= number_format($listing["price"]) ?></div>
+				<div><span><?= $listing["bedrooms"] ?></span> bed</div>
+				<div><span><?= $listing["bathrooms"] ?></span> bath</div>
+				<?php if ($listing["floor_area"] != 0)
+					echo "<div><span>" . number_format($listing["floor_area"]) .
+						"</span> sqft</div>\n"; ?>
+				<?php if ($listing["lot_area"] > 10000)
+					echo "<div><span>" . number_format(($listing["lot_area"] / 43560), 2) .
+						"</span> acre lot</div>\n";
+					elseif ($listing["lot_area"] != 0)
+					echo "<div><span>" . number_format($listing["lot_area"]) .
+						"</span> sqft lot</div>\n"; ?>
+				<div id="ld_address">
+					<?= $listing["street_address"] ?><br>
+					<?= $listing["city"] ?>, <?= $listing["state_abbrev"] ?> <?= $listing["zip"] ?> 
 				</div>
-				<!-- Next/previous controls -->
-				<a class="prev" onclick="change_image(-1)">&#10094;</a>
-				<a class="next" onclick="change_image(1)">&#10095;</a>
 			</div>
 		</div>
 		
+		<!-- Additional details and wish list button -->
+		<div id="lc_desc_title"><h2>Listing overview</h2></div>
+		<div id="listing_content">
+			<div id="lc_desc">
+				<div id="lc_desc_fade"></div>
+				<div id="lc_desc_text">
+					<br><?= file_get_contents("assets/descriptions/" . $listing["id"] . ".txt") ?> 
+					<br><br>
+				</div>
+			</div>
+			<div id="lc_facts">
+				<img src="assets/home.png"><br>
+				Built in <?= $listing["year_built"] ?><br>
+				<img src="assets/calendar.png"><br>
+				Listed for <?=
+				round((time() - strtotime($listing["date_listed"])) / 86400); ?> days
+			</div>
+			<div id="lc_wish_list">
+				<img src="assets/star.png"><br>
+				Add to wish list
+			</div>
+		</div>
 		
-		<!-- Listing details -->
-		<div id="listing_details">
-			<img src="assets/<?= $listing["id"] ?>/main.webp" onclick="open_gallery()">
+		<!-- Modal image gallery -->
+		<div id="gallery">
+			<span id="close" onclick="close_gallery()">&times;</span>
+			<div id="gallery_content">
+				<a id="prev" onclick="change_image(-1)">&#10094;</a>
+				<a id="next" onclick="change_image(1)">&#10095;</a>
+			</div>
 		</div>
-		<div>
-			<?= file_get_contents("assets/descriptions/" . $listing["id"] . ".txt") ?>
-		</div>
+		<script src="scripts/lightbox.js"></script>
+		<script>get_images(<?= $listing["id"] ?>)</script>
 	</body>
 </html>
-
-<!-- Array
-(
-    [id] => 29
-    [street_address] => 4665 Riverview Rd
-    [city] => Atlanta
-    [state_abbrev] => GA
-    [zip] => 30327
-    [price] => 46800000
-    [bedrooms] => 7
-    [bathrooms] => 8.5
-    [floor_area] => 0
-    [lot_area] => 808038
-    [year_built] => 1995
-    [date_listed] => 2023-02-05
-) -->
