@@ -69,7 +69,7 @@ function load_listings() {
   // Store the current offset, then move it forward by one row.
   const current_offset = offset;
   offset += limit;
-  const url = new URL("read_listings.php", window.location.origin);
+  const url = new URL("~agrizzle3/WP/PW/3/buyer_portal/read_listings.php", window.location.origin);
   url.searchParams.append("offset", current_offset);
   url.searchParams.append("limit", limit);
   if (search_filters) {
@@ -99,25 +99,25 @@ function load_listings() {
       // Handle errors that occurred during fetch
       console.error("Fetch error:", error);
     });
-  // Send GET request to PHP file with current offset.
-  // const xhr = new XMLHttpRequest();
-  // xhr.open("GET", url);
-  // xhr.onload = function () {
-  //   // Check the server response.
-  //   if (xhr.status === 200) {
-  //     // Parse the listings data.
-  //     const listings_data = JSON.parse(xhr.responseText);
-  //     if (listings_data.length > 0) {
-  //       // Create a new card for each listing.
-  //       listings_data.forEach((listing) => {
-  //         const card = document.createElement("div", { is: "listing-card" });
-  //         card.addData(listing);
-  //         card_container.appendChild(card);
-  //       });
-  //     }
-  //   }
-  // };
-  // xhr.send();
+//   Send GET request to PHP file with current offset.
+//   const xhr = new XMLHttpRequest();
+//   xhr.open("GET", url);
+//   xhr.onload = function () {
+//     // Check the server response.
+//     if (xhr.status === 200) {
+//       // Parse the listings data.
+//       const listings_data = JSON.parse(xhr.responseText);
+//       if (listings_data.length > 0) {
+//         // Create a new card for each listing.
+//         listings_data.forEach((listing) => {
+//           const card = document.createElement("div", { is: "listing-card" });
+//           card.addData(listing);
+//           card_container.appendChild(card);
+//         });
+//       }
+//     }
+//   };
+//   xhr.send();
 }
 
 // Check if the bottom of the page has been reached.

@@ -86,7 +86,7 @@ function readFromTable(string $query, array $encrypted)
         $table_vars = getEnvVars();
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "jmorris116", "batman"];
+            $table_vars = ["localhost", "agrizzle3", "batman"];
         }
         $conn = new mysqli($table_vars[0], $table_vars[1], $table_vars[1], $table_vars[1]);
         if ($conn->connect_error) {
@@ -109,10 +109,9 @@ function readFromTable(string $query, array $encrypted)
         error_log($e->getMessage());
 
         // Return an error response to the front-end
-        http_response_code(500); // Set the appropriate HTTP status code for the error
+        http_response_code(510); // Set the appropriate HTTP status code for the error
         echo json_encode(array('error' => $e->getMessage()));
     }
 
 }
-
 ?>
