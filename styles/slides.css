@@ -15,7 +15,7 @@ body {
   background: linear-gradient(to bottom, #74abe2, #5563de);
   font-family: "Ropa Sans", sans-serif;
 }
-header {
+.main-header {
   width: 100vw;
   margin: 0px;
   position: sticky;

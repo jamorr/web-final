@@ -1,62 +1,62 @@
 <html>
-    <head>
-        <title>Registration</title>
+  <head>
+    <title>Registration</title>
 
     <style>
-
-    .error{
-    color:red;
-    font-weight:bold;
-
-    } 
-    #pass-error{
-    color:red;
-
-    }   
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+      #pass-error {
+        color: red;
+      }
     </style>
-    </head>
-<body>
-<h1>Registration Page</h1>
-<fieldset><form action="register-submit.php" method="post" onsubmit="return validate()">
-    <table>
-        <tr>
+  </head>
+  <body>
+    <h1>Registration Page</h1>
+    <fieldset>
+      <form
+        action="register-submit.php"
+        method="post"
+        onsubmit="return validate()"
+      >
+        <table>
+          <tr>
             <td><strong>Firstname:</strong></td>
-            <td><input type="text" name="firstname" id="firstname"></td>
-        </tr>
-        <tr>
+            <td><input type="text" name="firstname" id="firstname" /></td>
+          </tr>
+          <tr>
             <td><strong>Lastname:</strong></td>
-            <td><input type="text" name="lastname" id="lastname"></td>
-        </tr>
-        <tr>
+            <td><input type="text" name="lastname" id="lastname" /></td>
+          </tr>
+          <tr>
             <td><strong>Email Address:</strong></td>
-            <td><input type="email" name="email" id="email"></td>
-        </tr>
-        <tr>
+            <td><input type="email" name="email" id="email" /></td>
+          </tr>
+          <tr>
             <td><strong>Password:</strong></td>
-            <td><input type="password" name="pass" id="pass"></td>
-        </tr>
-        <tr>
+            <td><input type="password" name="pass" id="pass" /></td>
+          </tr>
+          <tr>
             <td><strong>Confirm Password:</strong></td>
             <td>
-                <input type="password" name="pass2" id="pass2" onchange="confirmpass()">
-                <div id="pass-error"></div>
+              <input
+                type="password"
+                name="pass2"
+                id="pass2"
+                onchange="confirmpass()"
+              />
+              <div id="pass-error"></div>
             </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center"><input type="submit"></td>
-        </tr>
-    </table>
-</form>
-<br>
-<a href = 'login.html'>Already have an account? Sign in here!</a>
-
-</fieldset>
-
-
-</body>
-<script src = "scripts/register.js"></script>
-
-
-
-
+          </tr>
+          <tr>
+            <td colspan="2" align="center"><input type="submit" /></td>
+          </tr>
+        </table>
+      </form>
+      <br />
+      <a href="login.html">Already have an account? Sign in here!</a>
+    </fieldset>
+  </body>
+  <script src="scripts/register.js"></script>
 </html>
