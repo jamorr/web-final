@@ -14,7 +14,7 @@ body {
 	background-color: #000000;
 	padding: 20px;
 	color: #ffffff;
-	z-index: 10;
+	z-index: 2;
 }
 .main-header a {
 	color: #fff;
@@ -232,6 +232,7 @@ footer {
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(255, 255, 255, 0.7);
+	z-index: 10;
 }
 #gallery_content {
 	position: relative;

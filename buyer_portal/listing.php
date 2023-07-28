@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<?php
+		// Checking is the account is authorized.
+		session_start();
+		if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
+			header("Location: ../index.html");
+		}
+		?>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="styles/style.css">
-		<title>Listing Details</title>
 		<?php require_once 'read_listing_details.php';?>
+		<title>nestXchange • <?= $listing["street_address"] ?></title>
 	</head>
 	<body>
+		
 		<header class="main-header">
 			<h1>nestXchange</h1>
 			<a href="../account_page/account.html">Account settings</a>
