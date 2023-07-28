@@ -1,6 +1,27 @@
 /* Common styling */
 body {
+	margin: 0;
 	font-family: sans-serif;
+}
+
+
+/* Styling for page header/footer */
+.main-header {
+	width: 100vw;
+	margin: 0px;
+	position: sticky;
+	top: 0;
+	background-color: #000000;
+	padding: 20px;
+	color: #ffffff;
+	z-index: 10;
+}
+.main-header a {
+	color: #fff;
+}
+footer {
+	text-align: center;
+	margin-top: 20px;
 }
 
 
@@ -63,7 +84,7 @@ body {
 #listing_details {
 	width: 1260px;
 	margin: auto;
-	margin-top: 50px;
+	margin-top: 20px;
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px #ddd;
 	display: flex;

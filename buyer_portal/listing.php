@@ -7,6 +7,11 @@
 		<?php require_once 'read_listing_details.php';?>
 	</head>
 	<body>
+		<header class="main-header">
+			<h1>nestXchange</h1>
+			<a href="../account_page/account.html">Account settings</a>
+		</header>
+		
 		<!-- Main listing image and details -->
 		<div id="listing_details">
 			<img src="assets/<?= $listing["id"] ?>/main.webp" onclick="open_gallery()">
@@ -66,5 +71,7 @@
 		</div>
 		<script src="scripts/lightbox.js"></script>
 		<script>get_images(<?= $listing["id"] ?>)</script>
+		
+		<footer>&copy; 2023 nestXchange</footer>
 	</body>
 </html>
