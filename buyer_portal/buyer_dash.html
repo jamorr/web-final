@@ -14,7 +14,7 @@
         border: none;
         padding: 8px 16px;
         overflow: hidden;
-        -webkit-appearance: button;
+        --webkit-appearance: button;
         text-decoration: none;
         cursor: pointer;
         text-transform: none;
@@ -24,7 +24,6 @@
       }
       .accordion-button:hover {
         color: #000 !important;
-
         background-color: #ccc !important;
       }
       .adv-search {
@@ -35,7 +34,7 @@
       .adv-search label,
       input {
         margin-top: 20px;
-        mmargin-bottom: 20px;
+        margin-bottom: 20px;
       }
       .adv-search label {
         display: inline-block;
@@ -46,6 +45,10 @@
     <title>Buyer Dashboard</title>
   </head>
   <body>
+	<header class="main-header">
+		<h1>nestXchange</h1>
+		<a href="../account_page/account.html">Account settings</a>
+	</header>
     <h1>Buyer Dashboard</h1>
 
     <!-- Search elements -->
@@ -94,5 +97,7 @@
         }
       }
     </script>
+	
+	<footer>&copy; 2023 nestXchange</footer>
   </body>
 </html>

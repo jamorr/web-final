@@ -7,6 +7,11 @@
 		<?php require_once 'read_listing_details.php';?>
 	</head>
 	<body>
+		<header class="main-header">
+			<h1>nestXchange</h1>
+			<a href="../account_page/account.html">Account settings</a>
+		</header>
+		
 		<!-- Main listing image and details -->
 		<div id="listing_details">
 			<img src="assets/<?= $listing["id"] ?>/main.webp" onclick="open_gallery()">
@@ -28,6 +33,9 @@
 					<?= $listing["city"] ?>, <?= $listing["state_abbrev"] ?> <?= $listing["zip"] ?> 
 				</div>
 			</div>
+			<div id="back_button" onclick="history.back()">
+				&larr; Back to dashboard
+			</div>
 		</div>
 		
 		<!-- Additional details and wish list button -->
@@ -47,7 +55,7 @@
 				Listed for <?=
 				round((time() - strtotime($listing["date_listed"])) / 86400); ?> days
 			</div>
-			<div id="lc_wish_list">
+			<div id="lc_wish_list" onclick="alert('test')";>
 				<img src="assets/star.png"><br>
 				Add to wish list
 			</div>
@@ -63,5 +71,7 @@
 		</div>
 		<script src="scripts/lightbox.js"></script>
 		<script>get_images(<?= $listing["id"] ?>)</script>
+		
+		<footer>&copy; 2023 nestXchange</footer>
 	</body>
 </html>

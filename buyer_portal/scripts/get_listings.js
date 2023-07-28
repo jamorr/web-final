@@ -4,15 +4,31 @@ class Listing extends HTMLDivElement {
     this.classList.add("listing");
   }
   addData(data) {
-    // Link the card to the listing page.
-    this.addEventListener("click", function () {
-      window.location.href = `listing.php?id=${data.id}`;
-    });
-
     // Add the main image.
     const main_image = new Image();
     main_image.src = `assets/${data.id}/main.webp`;
     this.appendChild(main_image);
+
+	// Add the wish list button.
+	const wl_button = document.createElement("div");
+	wl_button.classList.add("wl_button");
+	wl_button.addEventListener("click", function () {
+		// Add the listing to the wish list here.
+		alert("test");
+	});
+	const wl_icon = new Image();
+	wl_icon.src = "assets/star.png"
+	wl_button.appendChild(wl_icon);
+	this.appendChild(wl_button);
+	
+	// Link the card to the listing page.
+	if (document.querySelector('#elementSelector:hover')) {
+		alert('I like it when you touch me!');
+	}
+    this.addEventListener("click", function (e) {
+		if(e.target != wl_button) {}
+			window.location.href = `listing.php?id=${data.id}`;
+    });
 
     // Add the price.
     const price = document.createElement("div");

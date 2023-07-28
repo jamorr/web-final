@@ -1,6 +1,27 @@
 /* Common styling */
 body {
+	margin: 0;
 	font-family: sans-serif;
+}
+
+
+/* Styling for page header/footer */
+.main-header {
+	width: 100vw;
+	margin: 0px;
+	position: sticky;
+	top: 0;
+	background-color: #000000;
+	padding: 20px;
+	color: #ffffff;
+	z-index: 10;
+}
+.main-header a {
+	color: #fff;
+}
+footer {
+	text-align: center;
+	margin-top: 20px;
 }
 
 
@@ -18,6 +39,7 @@ body {
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px #ddd;
 	transition: 0.5s ease;
+	position: relative;
 }
 .listing:hover {
 	box-shadow: 0px 5px 10px #aaa;
@@ -38,17 +60,36 @@ body {
 	font-size: 16pt;
 	font-weight: bold;
 }
+.wl_button {
+	padding: 10px;
+	border-radius: 100%;
+	position: absolute;
+	top: 180px;
+	right: 10px;
+	background-color: #fff;
+	opacity: 75%;
+}
+.wl_button:hover {
+	opacity: 100%;
+	background-color: gold;
+	transition: 0.5s ease;
+}
+.wl_button img {
+	width: 25px;
+	height: 25px;
+}
 
 
 /* Styling for listing details */
 #listing_details {
 	width: 1260px;
 	margin: auto;
-	margin-top: 30px;
+	margin-top: 20px;
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px #ddd;
 	display: flex;
 	overflow: hidden;
+	position: relative;
 }
 #listing_details img {
 	width: 960px;
@@ -151,7 +192,6 @@ body {
 	font-size: 18pt;
 	font-weight: bold;
 	text-align: center;
-	transition: 0.5s ease;
 }
 #lc_wish_list img {
 	width: 60px;
@@ -161,6 +201,21 @@ body {
 #lc_wish_list:hover {
 	background: gold;
 	transition: 0.5s ease;
+	cursor: pointer;
+}
+#back_button {
+	font-weight: bold;
+	padding: 15px;
+	border-radius: 0 0 5px 5px;
+	background-color: #ddd;
+	transition: 0.3s ease;
+	position: absolute;
+	top: 0;
+	left: 20px;
+}
+#back_button:hover {
+	background-color: #fff;
+	transition: 0.3s ease;
 	cursor: pointer;
 }
 
