@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>nestXchange</title>
+    <link rel="stylesheet" href="./styles/slides.css" />
+    <link rel="stylesheet" href="./styles/home_style.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>nestXchange</h1>
+      <button onclick="showModal('login');">Login</button>
+      <button onclick="showModal('register');">Register</button>
+    </header>
+
+    <main>
+      <div class="modal-wrapper" style="display: none" id="popup">
+        <div class="modal">
+          <header class="modal-header">
+            <h2>Welcome!</h2>
+            <span class="exit-x" onclick="hideModal();">&times;</span>
+          </header>
+          <div class="modal-tabs-box" id="tabs-bar">
+            <button
+              type="button"
+              class="modal-tab-item"
+              onclick="showTab('login');"
+              title="login"
+            >
+              Log in
+            </button>
+            <button
+              type="button"
+              class="modal-tab-item"
+              onclick="showTab('register');"
+              title="register"
+            >
+              Register
+            </button>
+          </div>
+          <div class="modal-content" style="display: none" id="login">
+            <h1>Login</h1>
+            <fieldset>
+              <form method="post" action="login-auth.php" id="login-form">
+                <table>
+                  <tr>
+                    <td><strong>Email Address:</strong></td>
+                    <td><input type="email" name="email" id="email" /></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Password:</strong></td>
+                    <td><input type="password" name="pass" id="pass" /></td>
+                  </tr>
+                  <tr>
+                    <td><input type="submit" /></td>
+                  </tr>
+                </table>
+              </form>
+              <br />
+            </fieldset>
+          </div>
+          <div class="modal-content" style="display: none" id="register">
+            <h1>Register</h1>
+            <fieldset>
+              <form
+                action="register-submit.php"
+                method="post"
+                onsubmit="return validate()"
+              >
+                <table>
+                  <tr>
+                    <td><strong>Firstname:</strong></td>
+                    <td>
+                      <input type="text" name="firstname" id="firstname" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Lastname:</strong></td>
+                    <td><input type="text" name="lastname" id="lastname" /></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Email Address:</strong></td>
+                    <td><input type="email" name="email" id="email" /></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Password:</strong></td>
+                    <td><input type="password" name="pass" id="pass" /></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Confirm Password:</strong></td>
+                    <td>
+                      <input
+                        type="password"
+                        name="pass2"
+                        id="pass2"
+                        onchange="confirmpass()"
+                      />
+                      <div id="pass-error"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" align="center"><input type="submit" /></td>
+                  </tr>
+                </table>
+              </form>
+              <br />
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider">
+        <a href="#slide-1">1</a>
+        <a href="#slide-2">2</a>
+        <a href="#slide-3">3</a>
+        <a href="#slide-4">4</a>
+        <a href="#slide-5">5</a>
+
+        <div class="slides">
+          <div id="slide-1">1</div>
+          <div id="slide-2">2</div>
+          <div id="slide-3">3</div>
+          <div id="slide-4">4</div>
+          <div id="slide-5">5</div>
+        </div>
+      </div>
+    </main>
+    <footer>&copy; 2023 nestXchange</footer>
+    <script src="./scripts/modal.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/register.js"></script>
+  </body>
+</html>
