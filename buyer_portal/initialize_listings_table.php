@@ -1,9 +1,9 @@
 <?php
 // Connect to the database.
 $host = "localhost";
-$user = "jmorris116";
-$pass = "jmorris116";
-$dbname = "jmorris116";
+$user = "agrizzle3";
+$pass = "agrizzle3";
+$dbname = "agrizzle3";
 $conn = new mysqli($host, $user, $pass, $dbname);
 
 // Check the connection.
