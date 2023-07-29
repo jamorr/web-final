@@ -142,19 +142,29 @@ function validateCCInfo() {
   return true;
 }
 
+function showCreditModal() {
+  const modal = document.getElementById("popup");
+  modal.style.display = "block";
+}
+
+function hideCreditModal() {
+  const modal = document.getElementById("popup");
+  modal.style.display = "none";
+}
+
 cc_n.addEventListener("input", setCCLogo);
 same_check.addEventListener("change", (_) => {
   toggleBilling();
 });
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  console.log("submit detected");
   if (validateCCInfo()) {
-    // form.submit();
-    // const form = e.target;
     const formData = new FormData(form); // Create a FormData object to store form data
     formData.set("cc_billing_addr", billing.value);
     const url = "./card-submit.php";
 
+    console.log("valid info: fetch");
     // Using fetch API
     fetch(url, {
       method: "POST",
@@ -165,6 +175,7 @@ form.addEventListener("submit", (e) => {
           // If the response status code indicates an error (e.g., 500), handle the error
           return response.json().then((data) => {
             console.error("Error:", data.error);
+            console.log(data);
             // You can log the error or display it to the user as needed
             // For example, show an error message to the user:
             // showErrorToUser(data.error);

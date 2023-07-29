@@ -48,7 +48,7 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
     try {
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "jfassett1", 78324761];
+            $table_vars = ["localhost", "agrizzle3", 78324761];
         }
 
         $conn = initConnection($table_vars);
@@ -98,12 +98,11 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
 function readFromTable(string $query, array $encrypted)
 {
     try {
-        // file_put_contents("./db.log", print_r(getEnvVars(), true));
     
         // $table_vars = getEnvVars();
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "agrizzle3", "batman"];
+            $table_vars = ["localhost", "agrizzle3",78324761];
         }
         $conn = initConnection($table_vars);
         $data = $conn->query($query);
