@@ -9,7 +9,7 @@ function get_wishlist() {
   }, {});
   // console.log(cookie_obj);
 
-  return JSON.parse(decodeURI(cookie_obj[user_email]));
+  return JSON.parse(decodeURIComponent(cookie_obj[user_email]));
 }
 
 // Add or remove the listing id to the wish list cookie.
