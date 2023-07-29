@@ -48,20 +48,22 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
     try {
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "jfassett1", "batman"];
+            $table_vars = ["localhost", "agrizzle3", 78324761];
         }
 
         $conn = initConnection($table_vars);
         $decoded = json_decode($data);
+
+        $value_array = [];
         $key_str = "";
         $val_str = "";
         foreach ($decoded as $key => $value) {
             $key_str .= $key . ",";
-            if ($encrypt && !empty($encrypt[1]) && key_exists($key, $encrypt[1])) {
-                $val_str .= "'" . encryptData($value, $table_vars[2], $encrypt[0]) . "',";
+            if ($encrypt && in_array($key, $encrypt[1])) {
+                array_push($value_array,encryptData($value, $table_vars[2], $encrypt[0]));
             } else {
                 // Use real_escape_string to avoid SQL injection
-                $val_str .= "'" . $conn->real_escape_string($value) . "',"; 
+                array_push($value_array,$value); 
             }
         }
         
@@ -69,11 +71,11 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
         $val_str = rtrim($val_str, ",");
         // $numvals = count($decoded);
         // $placeholders = rtrim(str_repeat("?,", $numvals), ',');
-        $values = array_values((array) $decoded);
+        // $values = array_values((array) $val_str);
         // print_r($values);
         // echo $values;
         $stmt = $conn->prepare($bind);  
-        $stmt->bind_param($param_types, ...$values);
+        $stmt->bind_param($param_types, ...$value_array);
         $stmt->execute();
         if ($stmt->error) {
             // If there was an error with the SQL execution, send an error response
@@ -84,6 +86,9 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
         }
         $conn->close();
        echo json_encode($response);
+
+
+
     } catch (Exception $e) {
         // Log the error (optional)
         error_log($e->getMessage());
@@ -102,18 +107,19 @@ function readFromTable(string $query, array $encrypted)
         // $table_vars = getEnvVars();
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "jfassett1", "batman"];
+            $table_vars = ["localhost", "agrizzle3", 78324761];
         }
         $conn = initConnection($table_vars);
         $data = $conn->query($query);
         $output = [];
         while ($row = $data->fetch_assoc()) {
-            foreach ($encrypted as $key => $value) {
+            foreach ($encrypted[1] as $key => $value) {
                 $row[$value] = decryptData($row[$value], $table_vars[2], $encrypted[0]);
             }
             array_push($output, $row);
         }
         $conn->close();
+        // return $output['password'];
         return json_encode($output);
     } catch (Exception $e) {
         // Log the error (optional)

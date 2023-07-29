@@ -1,3 +1,18 @@
+<?php  
+session_start();
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] = false) {
+    header("Location: ../index.html");
+}
+require "../common_database.php";
+
+$email = $_SESSION['email'];
+$query = "SELECT * FROM Login WHERE email = $email;";
+$response = readFromTable($query, []);
+$credits_q = "SELECT * FROM Credit WHERE email = $email";
+$credits_response = readFromTable($query, ["aes-256-cbc", ["cc_num"]]);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -90,10 +105,10 @@
       </div>
       <div class="user-details">
         <h2 id="user-details">User Details</h2>
-        <p id="first-name"><strong>First Name:</strong> John</p>
-        <p id="last-name"><strong>Last Name:</strong> Doe</p>
-        <p id="email"><strong>Email:</strong> john.doe@example.com</p>
-        <p><strong>Member Since:</strong> July 1, 2022</p>
+        <p id="first-name"><strong>First Name:</strong><?php echo $response['first-name']?></p>
+        <p id="last-name"><strong>Last Name:</strong> <?php echo $response['last-name']?></p>
+        <p id="email"><strong>Email:</strong><?php echo $email?></p>
+        <p><strong>Member Since:</strong> July 1, 2023</p>
       </div>
     </main>
     <footer></footer>
