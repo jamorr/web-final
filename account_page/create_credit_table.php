@@ -1,6 +1,6 @@
 <?php 
 require "../common_database.php";
-$conn = initConnection(["localhost", "jmorris116", "batman"]);
+$conn = initConnection(["localhost", "agrizzle3", "batman"]);
 
 // Create the Listings table.
 $sql = "CREATE TABLE Credit (
