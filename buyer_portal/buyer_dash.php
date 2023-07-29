@@ -1,9 +1,23 @@
 <?php
+require "../common_database.php";
 // Checking if the account is authorized.
 session_start();
 if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
     header("Location: ../index.html");
 }
+
+//Checking to see if account is new
+// if($_SESSION['new']){
+//     $email = $_SESSION['email'];
+//     $query = "SELECT * FROM LISTINGS WHERE email = '$email'";
+//     $db_info = readFromTable($query,[]);
+//     $db_info = json_decode($db_info);
+//     print_r($db_info);
+//     }
+
+$email = $_SESSION['email'];
+$name = $_SESSION['name'];
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +42,15 @@ if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
     <script src="scripts/wishlist.js"></script>
 		
 		<!-- Search elements -->
+
 		<div id="search_container">
+        <?php
+    if ($_SESSION['new'] === true) {
+                ?> 
+            <h2>Welcome to Nestxchange, <?=$name?>!</h2> </br>
+            <?php 
+            }
+                ?>
 			<input type="text" id="query" />
 			<button id="search">Search</button>
 			<button id="clear_search">Clear</button>
