@@ -8,7 +8,7 @@ $sql = "CREATE TABLE user_info (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL
+    password VARCHAR(50) NOT NULL,
     new INT NOT NULL
 );";
 if ($conn->query($sql) === true) {
