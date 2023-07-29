@@ -46,10 +46,11 @@ $credits_response = json_decode($credits_response, true);
         <p id="first-name"><strong>First Name:</strong><?php echo $response['first_name']?></p>
         <p id="last-name"><strong>Last Name:</strong> <?php echo $response['last_name']?></p>
         <p id="email"><strong>Email:</strong><?php echo $email?></p>
-        <p><strong>Member Since:</strong> </p>
+        <!-- <p><strong>Member Since:</strong> </p> -->
       </div>
       <div class="user-details">
 
+        <h1>Payment Info</h1>
         <?php 
         $better_text = [
           "cc_name" => "Name",
