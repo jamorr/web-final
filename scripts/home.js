@@ -24,7 +24,7 @@ function fillSlider(data) {
   const sliderElement = document.getElementById(`slide-${data.id}`);
   // Add the main image.
   const img = document.createElement("img");
-  img.src = `https://codd.cs.gsu.edu/~agrizzle3/WP/PW/3/buyer_portal/assets/${data.id}/main.webp`;
+  img.src = `https://codd.cs.gsu.edu/~jmorris116/WP/PW/3/buyer_portal/assets/${data.id}/main.webp`;
   img.width = "200px";
   img.id = "home_list_img";
   img.classList.add("home_list_image");

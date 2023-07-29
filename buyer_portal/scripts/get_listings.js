@@ -89,7 +89,7 @@ function load_listings() {
 
   // Construct a URL to send a GET request.
   const url = new URL(
-    "~agrizzle3/WP/GP/3/buyer_portal/read_listings.php",
+    "~jmorris116/WP/GP/3/buyer_portal/read_listings.php",
     window.location.origin
   );
   url.searchParams.append("offset", current_offset);
