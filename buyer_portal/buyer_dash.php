@@ -11,7 +11,6 @@ if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="styles/style.css" />
-        <script src="scripts/wishlist.js"></script>
         <title>nestXchange • Dashboard</title>
     </head>
     <body>
@@ -20,8 +19,13 @@ if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
             <h1>nestXchange</h1>
             <a href="../account_page/account.php">Account settings</a> •
             <a href="">Wish list</a>
+<div id="user_identifier">
+      <?php
+        echo $_SESSION['email'] ?>
+    </div>
         </header>
         
+        <script src="scripts/wishlist.js"></script>
         <!-- Search elements -->
         <div id="search_container">
             <input type="text" id="query" />

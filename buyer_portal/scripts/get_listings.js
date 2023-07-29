@@ -27,7 +27,7 @@ class Listing extends HTMLDivElement {
 
     // Link the card to the listing page.
     this.addEventListener("click", function (e) {
-      if (!(e.target == wl_button) && !(e.target == wl_icon))
+      if (!(e.target === wl_button) && !(e.target === wl_icon))
         window.location.href = `listing.php?id=${data.id}`;
     });
 
@@ -89,7 +89,7 @@ function load_listings() {
 
   // Construct a URL to send a GET request.
   const url = new URL(
-    "~agrizzle3/WP/GP/3/buyer_portal/read_listings.php",
+    "~jmorris116/WP/GP/3/buyer_portal/read_listings.php",
     window.location.origin
   );
   url.searchParams.append("offset", current_offset);

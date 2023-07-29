@@ -48,7 +48,7 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
     try {
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "agrizzle3", 78324761];
+            $table_vars = ["localhost", "jmorris116", 78324761];
         }
 
         $conn = initConnection($table_vars);
@@ -102,7 +102,7 @@ function readFromTable(string $query, array $encrypted)
         // $table_vars = getEnvVars();
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "agrizzle3",78324761];
+            $table_vars = ["localhost", "jmorris116",78324761];
         }
         $conn = initConnection($table_vars);
         $data = $conn->query($query);

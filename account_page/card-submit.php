@@ -37,5 +37,4 @@ cc_exp_YY, cc_addr, cc_billing_addr, cc_phone
 ) 
 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
  writeToTable("Credit", ["aes-256-cbc",["cc_num"]], json_encode($data), $query, "sssiisss");
-echo "$valid \n\n $query";
 ?>
