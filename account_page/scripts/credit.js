@@ -142,6 +142,16 @@ function validateCCInfo() {
   return true;
 }
 
+function showCreditModal() {
+  const modal = document.getElementById("popup");
+  modal.style.display = "block";
+}
+
+function hideCreditModal() {
+  const modal = document.getElementById("popup");
+  modal.style.display = "none";
+}
+
 cc_n.addEventListener("input", setCCLogo);
 same_check.addEventListener("change", (_) => {
   toggleBilling();

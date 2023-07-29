@@ -18,8 +18,12 @@ $valid = $valid && (int)$cc_exp_MM > 1 && (int)$cc_exp_MM < 12;
 $valid = $valid && ($cc_exp_YY > $year || ($cc_exp_YY === $year && $cc_exp_MM >= $month));
 $valid = $valid && $cc_addr && $cc_billing_addr;
 $valid = $valid && $cc_phone !== null && preg_match("/^[0-9]{10,}$/", $cc_phone);
-$p = json_encode($_POST);
-// $valid && writeToTable("credit", ["aes-256-cbc", ["cc_num"]], json_encode($_POST));
-$valid && writeToTable("Credit", [], json_encode($_POST));
+$query = "INSERT INTO Credit 
+(
+cc_name, cc_num, cc_exp_MM, cc_exp_YY,
+cc_addr, cc_billing_addr, cc_phone
+) 
+VALUES (?, ?, ?, ?, ?, ?, ?)";
+$valid && writeToTable("Credit", ["aes-256-cbc",["cc_num"]], json_encode($_POST), $query, "ssiisss");
 exit();
 ?>
