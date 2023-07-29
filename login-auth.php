@@ -6,21 +6,9 @@ $pass = $_POST['l_pass'];
 
 
 $query = "SELECT * FROM user_info WHERE email = '$email'";
-// $query = "SELECT * FROM user_info";
-
 $response = readFromTable($query, ["aes-256-cbc",["password"]]);
 
-$response = json_decode($response,true);
-$outpt = "";
-// foreach($response as $key =>$value){
-//     $outpt .= "$key = $value";
-// }
-
-// echo "\n";
-// echo "\n";
-// echo $_POST['l_pass'];
-// echo "\n\n";
-// echo password_verify($_POST["l_pass"],$response['password'])?"success":"failure";
+$response = json_decode($response, true);
 
 if (!$response) {
     echo "User not found";
@@ -33,19 +21,13 @@ if (!$response) {
     }
     if ($response['new'] === true) {
         $_SESSION['new'] = true;
+        writeToTable("user_info", [], ["new"=> false], )
     }
     else {
         $_SESSION['new'] = false;
- 
     }
-    // header("Location: ./buyer_dash.php"); 
     echo "Success";  
 } else {
-    echo $outpt;
-    echo json_encode($response);
     echo "Incorrect password";
-    echo $response['password'];
-    echo "\n\n";
-    echo $pass;
 }
 ?>
