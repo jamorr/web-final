@@ -19,8 +19,7 @@ require_once 'read_listing_details.php';
 		<!-- Header -->
 		<header class="main-header">
 			<h1>nestXchange</h1>
-			<a href="../account_page/account.">Account settings</a> •
-			<a href="">Wish list</a>
+			<a href="../account_page/account.">Account settings</a>
 		</header>
 		
 		<!-- Main listing image and details -->

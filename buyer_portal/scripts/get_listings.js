@@ -79,7 +79,7 @@ class Listing extends HTMLDivElement {
 }
 
 // Load rows of listing cards.
-function load_listings() {
+function load_listings(show_wishlist) {
 	// Stop if all listings have already been loaded.
 	if (offset >= 30) return;
 
@@ -96,7 +96,7 @@ function load_listings() {
 	url.searchParams.append("limit", limit);
 	if (search_filters) {
 		Object.keys(search_filters).forEach((key) => {
-		url.searchParams.append(key, search_filters[key]);
+			url.searchParams.append(key, search_filters[key]);
 		});
 	}
 	
@@ -111,10 +111,13 @@ function load_listings() {
 		.then((listings_data) => {
 		if (listings_data.length > 0) {
 			// Create a new card for each listing.
+			const wish_list = get_wishlist();
 			listings_data.forEach((listing) => {
 				const card = document.createElement("div", { is: "listing-card" });
-				card.addData(listing);
-				card_container.appendChild(card);
+				if (!show_wishlist || wish_list.includes(parseInt(listing.id))) {
+					card.addData(listing);
+					card_container.appendChild(card);
+				}
 			});
 		}
 		})
@@ -131,7 +134,7 @@ if (window.innerHeight + window.scrollY >= document.body.offsetHeight)
 }
 
 // Search for listings.
-function search() {
+function search(show_wishlist) {
 	search_filters = {};
 	element_ids.forEach((element) => {
 		const doc = document.getElementById(element);
@@ -139,11 +142,13 @@ function search() {
 	});
 	card_container.innerHTML = "";
 	offset = 0;
+	
+	if (show_wishlist === true) remove_infinite_scroll();
 
 	// Initially load 3 rows of listing cards.
-	load_listings();
-	load_listings();
-	load_listings();
+	load_listings(show_wishlist);
+	load_listings(show_wishlist);
+	load_listings(show_wishlist);
 }
 
 // Set variables for the listing card container and search form elements.
@@ -163,14 +168,35 @@ const element_ids = [
 let search_filters = {};
 const search_button = document.getElementById("search");
 search_button.addEventListener("click", function () {
+	remove_infinite_scroll();
+	add_infinite_scroll();
 	search();
 });
+
+const clear_button = document.getElementById("clear_search");
+clear_button.addEventListener("click", function () {
+	remove_infinite_scroll();
+	add_infinite_scroll();
+	const inputs = document.getElementsByTagName("input");
+	for (let i = 0; i < inputs.length; i++)
+		inputs[i].value = "";
+	search();
+});
+
+// Add a listener for scroll event.
+function add_infinite_scroll() {
+	window.addEventListener("scroll", check_scroll);
+}
+
+// Remove a listener for scroll event.
+function remove_infinite_scroll() {
+	window.removeEventListener("scroll", check_scroll);
+}
 
 // Define a custom element "listing-card" from the Listing class.
 customElements.define("listing-card", Listing, { extends: "div" });
 
-// Add a listener for scroll event.
-window.addEventListener("scroll", check_scroll);
+
 
 // Initially load 3 rows of listing cards.
 let offset = 0; // Set the row offset.
@@ -178,3 +204,4 @@ const limit = 3; // Set the number of rows to get.
 load_listings();
 load_listings();
 load_listings();
+add_infinite_scroll()

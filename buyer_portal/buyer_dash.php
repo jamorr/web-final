@@ -18,13 +18,14 @@ if (!isset($_SESSION['auth']) || !$_SESSION['auth'])
 		<header class="main-header">
 			<h1>nestXchange</h1>
 			<a href="../account_page/account.">Account settings</a> •
-			<a href="">Wish list</a>
+			<a href="javascript:search(true)">Wish list</a>
 		</header>
 		
 		<!-- Search elements -->
 		<div id="search_container">
 			<input type="text" id="query" />
 			<button id="search">Search</button>
+			<button id="clear_search">Clear</button>
 			<button type="button" class="accordion-button" onclick="showDropdown();">
 				Advanced Filters
 			</button>
