@@ -7,8 +7,7 @@ function get_wishlist() {
     prev[name] = value.join("=");
     return prev;
   }, {});
-  const cookie_str = JSON.stringify(cookie_obj);
-  console.log(cookie_obj);
+  // console.log(cookie_obj);
 
   return JSON.parse(decodeURI(cookie_obj[user_email]));
 }
@@ -17,7 +16,6 @@ function get_wishlist() {
 function set_wishlist(raw_id) {
   const id = parseInt(raw_id);
   const wish_list = get_wishlist();
-  console.log(wish_list);
   if (wish_list.includes(id)) wish_list.splice(wish_list.indexOf(id), 1);
   else wish_list.push(id);
   const encoded_list = encodeURIComponent(JSON.stringify(wish_list));

@@ -12,7 +12,6 @@ require_once 'read_listing_details.php';
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles/style.css">
-        <script src="scripts/wishlist.js"></script>
         <title>nestXchange • <?php echo $listing["street_address"] ?></title>
     </head>
     <body>
@@ -22,8 +21,14 @@ require_once 'read_listing_details.php';
             <h1>nestXchange</h1>
             <a href="../account_page/account.">Account settings</a> •
             <a href="">Wish list</a>
+            <div id="user_identifier">
+              <?php
+                echo $_SESSION['email'] 
+                ?>
+            </div>
         </header>
         
+        <script src="scripts/wishlist.js"></script>
         <!-- Main listing image and details -->
         <div id="listing_details">
             <img src="assets/<?php echo $listing["id"] ?>/main.webp" onclick="open_gallery()">
