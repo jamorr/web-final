@@ -77,7 +77,7 @@ loginform.addEventListener("submit", (e) => {
   })
   .then((data) => {
     if(data == "Success"){
-      window.location.href = './buyer_portal/buyer_dash.html';
+      window.location.href = './buyer_portal/buyer_dash.php';
     }
       console.log("Server response:", data);
       // data = JSON.parse(data);
