@@ -1,6 +1,6 @@
 <?php 
 require "./common_database.php";
-$conn = initConnection(["localhost", "agrizzle3", 78324761]);
+$conn = initConnection(["localhost", "jmorris116", 78324761]);
 
 // Create the Listings table.
 $sql = "CREATE TABLE user_info (

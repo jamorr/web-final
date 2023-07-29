@@ -9,25 +9,26 @@ class Listing extends HTMLDivElement {
     main_image.src = `assets/${data.id}/main.webp`;
     this.appendChild(main_image);
 
-	// Add the wish list button.
-	const wl_button = document.createElement("div");
-	wl_button.classList.add("wl_button");
-	wl_button.addEventListener("click", function () {
-		// Add the listing to the wish list here.
-		alert("test");
-	});
-	const wl_icon = new Image();
-	wl_icon.src = "assets/star.png"
-	wl_button.appendChild(wl_icon);
-	this.appendChild(wl_button);
-	
-	// Link the card to the listing page.
-	if (document.querySelector('#elementSelector:hover')) {
-		alert('I like it when you touch me!');
-	}
+    // Add the wish list button.
+    const wl_button = document.createElement("div");
+    wl_button.classList.add("wl_button");
+    wl_button.addEventListener("click", function () {
+      // Add the listing to the wish list here.
+      alert("test");
+    });
+    const wl_icon = new Image();
+    wl_icon.src = "assets/star.png";
+    wl_button.appendChild(wl_icon);
+    this.appendChild(wl_button);
+
+    // Link the card to the listing page.
+    if (document.querySelector("#elementSelector:hover")) {
+      alert("I like it when you touch me!");
+    }
     this.addEventListener("click", function (e) {
-		if(e.target != wl_button) {}
-			window.location.href = `listing.php?id=${data.id}`;
+      if (e.target != wl_button) {
+      }
+      window.location.href = `listing.php?id=${data.id}`;
     });
 
     // Add the price.
@@ -86,7 +87,7 @@ function load_listings() {
   const current_offset = offset;
   offset += limit;
   const url = new URL(
-    "~agrizzle3/WP/PW/3/buyer_portal/read_listings.php",
+    "~jmorris116/WP/GP/3/buyer_portal/read_listings.php",
     window.location.origin
   );
   url.searchParams.append("offset", current_offset);

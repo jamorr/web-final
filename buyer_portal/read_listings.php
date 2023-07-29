@@ -33,7 +33,7 @@ $column_names = ["price", "bedrooms", "bathrooms", "floor_area", "lot_area"];
 for ($i=0; $i < count($element_ids); $i++) { 
     $key = $element_ids[$i];
     $symbol = ($i % 2 === 0)?">=":"<=";
-	$col_name = (int) $i / 2;
+    $col_name = (int) $i / 2;
     if (isset($_GET[$key])) { 
         $sql.= "AND $column_names[$col_name] $symbol '$_GET[$key]' ";
     }
@@ -41,5 +41,5 @@ for ($i=0; $i < count($element_ids); $i++) {
 // include offset and limit
 $sql .= "LIMIT {$offset}, {$limit}";
 
-readFromTable($sql, []);
+echo readFromTable($sql, []);
 ?>

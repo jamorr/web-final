@@ -30,7 +30,7 @@ if (!$response) {
     else {
         $_SESSION['new'] = false;
     }
-    echo "Success";  
+    echo "Success";
 } else {
     echo "Incorrect password";
 }
