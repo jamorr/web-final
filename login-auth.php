@@ -16,15 +16,14 @@ if (!$response) {
     //successful login
     $_SESSION['auth'] = true;
     $_SESSION['email'] = $email;
-    if (!isset($_COOKIE['wishlist'])) {
-        setcookie("wishlist", json_encode([]), time()+1000000);
+    if (!isset($_COOKIE[$email])) {
+        setcookie($email, json_encode(array()), time()+1000000, "/");
     }
     if ($response['new'] === true) {
         $_SESSION['new'] = true;
         $params = "UPDATE user_info
         SET new = ? 
         WHERE email = '$email'";
-        $params = "INSERT INTO ";
         writeToTable("user_info", [], ["new"=> false], $params, "i");
     }
     else {

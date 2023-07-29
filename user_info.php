@@ -1,6 +1,6 @@
 <?php 
 require "./common_database.php";
-$conn = initConnection(["localhost", "jfassett1", 78324761]);
+$conn = initConnection(["localhost", "agrizzle3", 78324761]);
 
 // Create the Listings table.
 $sql = "CREATE TABLE user_info (
@@ -8,7 +8,7 @@ $sql = "CREATE TABLE user_info (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(200) NOT NULL,
     new INT NOT NULL
 );";
 if ($conn->query($sql) === true) {

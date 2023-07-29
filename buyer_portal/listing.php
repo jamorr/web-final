@@ -1,8 +1,9 @@
 <?php
 // Checking if the account is authorized.
 session_start();
-if (!isset($_SESSION['auth']) || !$_SESSION['auth'])
-	header("Location: ../index.html");
+if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
+    header("Location: ../index.html");
+}
 require_once 'read_listing_details.php';
 ?>
 
@@ -11,7 +12,6 @@ require_once 'read_listing_details.php';
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="styles/style.css">
-		<script src="scripts/wishlist.js"></script>
 		<title>nestXchange • <?= $listing["street_address"] ?></title>
 	</head>
 	<body>
@@ -20,7 +20,13 @@ require_once 'read_listing_details.php';
 		<header class="main-header">
 			<h1>nestXchange</h1>
 			<a href="../account_page/account.">Account settings</a>
+      <div id="user_identifier">
+      <?php
+        echo $_SESSION['email'] 
+        ?>
+      </div>
 		</header>
+    <script src="scripts/wishlist.js"></script>
 		
 		<!-- Main listing image and details -->
 		<div id="listing_details">
