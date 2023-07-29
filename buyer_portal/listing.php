@@ -1,23 +1,26 @@
+<?php
+// Checking if the account is authorized.
+session_start();
+if (!isset($_SESSION['auth']) || !$_SESSION['auth'])
+	header("Location: ../index.html");
+require_once 'read_listing_details.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php
-		// Checking is the account is authorized.
-		session_start();
-		if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
-			header("Location: ../index.html");
-		}
-		?>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="styles/style.css">
-		<?php require_once 'read_listing_details.php';?>
+		<script src="scripts/wishlist.js"></script>
 		<title>nestXchange • <?= $listing["street_address"] ?></title>
 	</head>
 	<body>
 		
+		<!-- Header -->
 		<header class="main-header">
 			<h1>nestXchange</h1>
-			<a href="../account_page/account.html">Account settings</a>
+			<a href="../account_page/account.">Account settings</a> •
+			<a href="">Wish list</a>
 		</header>
 		
 		<!-- Main listing image and details -->
@@ -63,10 +66,11 @@
 				Listed for <?=
 				round((time() - strtotime($listing["date_listed"])) / 86400); ?> days
 			</div>
-			<div id="lc_wish_list" onclick="alert('test')";>
+			<div id="lc_wish_list" onclick="set_wishlist(<?= $listing['id'] ?>); set_button()";>
 				<img src="assets/star.png"><br>
 				Add to wish list
 			</div>
+			<script>initialize_button(<?= $listing["id"] ?>)</script>
 		</div>
 		
 		<!-- Modal image gallery -->

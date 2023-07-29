@@ -103,7 +103,7 @@ function readFromTable(string $query, array $encrypted)
         // $table_vars = getEnvVars();
         $table_vars = null;
         if ($table_vars === null) {
-            $table_vars = ["localhost", "agrizzle3", 78324761];
+            $table_vars = ["localhost", "agrizzle3", "batman"];
         }
         $conn = initConnection($table_vars);
         $data = $conn->query($query);
