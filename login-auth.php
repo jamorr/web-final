@@ -21,7 +21,11 @@ if (!$response) {
     }
     if ($response['new'] === true) {
         $_SESSION['new'] = true;
-        writeToTable("user_info", [], ["new"=> false], )
+        $params = "UPDATE user_info
+        SET new = ? 
+        WHERE email = '$email'";
+        $params = "INSERT INTO ";
+        writeToTable("user_info", [], ["new"=> false], $params, "i");
     }
     else {
         $_SESSION['new'] = false;
