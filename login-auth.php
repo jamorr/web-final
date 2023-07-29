@@ -17,7 +17,7 @@ if (!$response) {
     $_SESSION['auth'] = true;
     $_SESSION['email'] = $email;
     if (!isset($_COOKIE['wishlist'])) {
-        setcookie("wishlist", json_encode([]), time()+1000000);
+        setcookie($email, json_encode(array()), time()+1000000, "/");
     }
     if ($response['new'] === true) {
         $_SESSION['new'] = true;
