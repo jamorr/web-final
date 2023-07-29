@@ -88,3 +88,14 @@
   line-height: 1.5;
   padding: 0.01em 16px;
 }
+.error{
+  color:red;
+  font-weight:bold;
+  font-size: 50%;
+
+  } 
+  #pass-error{
+  color:red;
+  font-size:50%;
+
+  }   
