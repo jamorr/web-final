@@ -1,4 +1,4 @@
-<?php  
+<?php
 session_start();
 if (!isset($_SESSION['auth']) || $_SESSION['auth'] = false) {
     header("Location: ../index.html");
@@ -6,10 +6,13 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] = false) {
 require "../common_database.php";
 
 $email = $_SESSION['email'];
-$query = "SELECT * FROM Login WHERE email = $email;";
+$query = "SELECT * FROM user_info WHERE email = '$email'";
 $response = readFromTable($query, []);
-$credits_q = "SELECT * FROM Credit WHERE email = $email";
+$response = json_decode($response, true)[0];
+
+$credits_q = "SELECT * FROM Credit WHERE email = '$email'";
 $credits_response = readFromTable($query, ["aes-256-cbc", ["cc_num"]]);
+$credits_response = json_decode($response, true);
 
 ?>
 
@@ -105,10 +108,31 @@ $credits_response = readFromTable($query, ["aes-256-cbc", ["cc_num"]]);
       </div>
       <div class="user-details">
         <h2 id="user-details">User Details</h2>
-        <p id="first-name"><strong>First Name:</strong><?php echo $response['first-name']?></p>
-        <p id="last-name"><strong>Last Name:</strong> <?php echo $response['last-name']?></p>
+        <p id="first-name"><strong>First Name:</strong><?php echo $response['first_name']?></p>
+        <p id="last-name"><strong>Last Name:</strong> <?php echo $response['last_name']?></p>
         <p id="email"><strong>Email:</strong><?php echo $email?></p>
-        <p><strong>Member Since:</strong> July 1, 2023</p>
+        <p><strong>Member Since:</strong> </p>
+      </div>
+      <div class="cc-info">
+        <?php 
+        $better_text = [
+          "cc_name" => "Name",
+          "cc_num" => "Card Number",
+          "cc_exp_MM" => "Expiration Month",
+          "cc_exp_YY" => "Expiration Year",
+          "cc_addr" => "Address",
+          "cc_billing_addr" => "Billing Address",
+          "cc_phone" => "Phone Number"
+        ];
+        foreach ($credits_response as $key => $value) {
+            if ($key === "cc_num") {
+                $value = "************".substr($value, 12);
+            }
+            ?>
+        <p><strong><?php echo $better_text[$key]?></strong><?echo $value?></p>
+            <?php
+        }
+        ?>
       </div>
     </main>
     <footer></footer>

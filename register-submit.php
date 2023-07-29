@@ -11,13 +11,14 @@ $submit = [
     "first_name" => $_POST['firstname'],
     "last_name" => $_POST['lastname'],
     "email" => $_POST['email'],
-    "password" => $_POST['pass']
+    "password" => $_POST['pass'],
+    "new" => true
 ];
 
-$stmt = "INSERT INTO user_info (first_name, last_name, email, password)
-VALUES (?, ?, ?, ?)";
+$stmt = "INSERT INTO user_info (first_name, last_name, email, password, new)
+VALUES (?, ?, ?, ?, ?)";
 
-$param = "ssss";
-writeToTable("user_info",["aes-256-cbc",["password"]],json_encode($submit),$stmt,$param);
+$param = "ssssi";
+writeToTable("user_info", ["aes-256-cbc",["password"]], json_encode($submit), $stmt, $param);
 
 ?>
