@@ -27,7 +27,7 @@ class Listing extends HTMLDivElement {
 
     // Link the card to the listing page.
     this.addEventListener("click", function (e) {
-      if (!(e.target == wl_button) && !(e.target == wl_icon))
+      if (!(e.target === wl_button) && !(e.target === wl_icon))
         window.location.href = `listing.php?id=${data.id}`;
     });
 

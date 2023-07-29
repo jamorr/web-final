@@ -27,7 +27,6 @@ $credits_response = json_decode($credits_response, true);
     <header class="main-header">
       <h1>nestXchange</h1>
     </header>
-
     <main>
       <h1>User Account Details</h1>
       <div class="sidebar">
@@ -41,17 +40,18 @@ $credits_response = json_decode($credits_response, true);
         </button>
         <br />
       </div>
+      <!-- Print user details  -->
       <div class="user-details">
         <h2 id="user-details">User Details</h2>
         <p id="first-name"><strong>First Name:</strong><?php echo $response['first_name']?></p>
         <p id="last-name"><strong>Last Name:</strong> <?php echo $response['last_name']?></p>
         <p id="email"><strong>Email:</strong><?php echo $email?></p>
-        <!-- <p><strong>Member Since:</strong> </p> -->
       </div>
       <div class="user-details">
 
         <h1>Payment Info</h1>
         <?php 
+        // print cc info
         $better_text = [
           "cc_name" => "Name",
           "cc_num" => "Card Number",
