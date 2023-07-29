@@ -12,7 +12,6 @@ $response = json_decode($response, true)[0];
 
 $credits_q = "SELECT * FROM Credit WHERE email = '$email'";
 $credits_response = readFromTable($credits_q, ["aes-256-cbc", ["cc_num"]]);
-$cred_enc = $credits_response;
 $credits_response = json_decode($credits_response, true);
 ?>
 
@@ -246,10 +245,8 @@ $credits_response = json_decode($credits_response, true);
 
             </form>
             <script src="./scripts/credit.js"></script>
-
           </div>
         </div>
-          
       </div>
     </main>
     <footer>&copy; nestXchange 2023</footer>

@@ -4,7 +4,7 @@ const slider3 = document.getElementById("slide-3");
 const slider4 = document.getElementById("slide-4");
 const slider5 = document.getElementById("slide-5");
 
-let sliders = [slider1, slider2, slider3, slider4, slider5];
+const sliders = [slider1, slider2, slider3, slider4, slider5];
 const url = "./top5.php";
 //Grabs 5 listings from the database.
 fetch(url, {
@@ -21,20 +21,17 @@ fetch(url, {
 
 //Listing info must be object
 function fillSlider(data) {
-  let sliderElement = document.getElementById("slide-" + data.id);
+  const sliderElement = document.getElementById(`slide-${data.id}`);
   // Add the main image.
-  let img = document.createElement("img");
-  img.src =
-    "https://codd.cs.gsu.edu/~agrizzle3/WP/PW/3/buyer_portal/assets/" +
-    data.id +
-    "/main.webp";
+  const img = document.createElement("img");
+  img.src = `https://codd.cs.gsu.edu/~agrizzle3/WP/PW/3/buyer_portal/assets/${data.id}/main.webp`;
   img.width = "200px";
   img.id = "home_list_img";
   img.classList.add("home_list_image");
 
   console.log(img.src);
   sliderElement.appendChild(img);
-  let subelement = document.createElement("div");
+  const subelement = document.createElement("div");
   subelement.classList.add("text-container");
   // let text = document.createElement("p");
   // // text.innerHTML = <strong>Address: </strong> + listing_info.street_address;
