@@ -18,6 +18,7 @@ if (!isset($_SESSION['auth']) || !$_SESSION['auth']) {
 		<header class="main-header">
 			<h1>nestXchange</h1>
 			<a href="../account_page/account.php">Account settings</a> •
+			<a href="../sign_out.php">Sign out</a> •
 			<a href="javascript:search(true)">Wish list</a>
       <div id="user_identifier">
       <?php

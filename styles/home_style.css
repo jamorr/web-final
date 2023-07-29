@@ -17,13 +17,12 @@
 }
 .modal {
   width: 500px;
-  height: 500px;
   animation: animatezoom 0.6s;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
   margin: auto;
   background-color: #fff;
   position: relative;
-  padding: 0;
+  padding-bottom: 20px;
   outline: 0;
 }
 @keyframes animatezoom {
@@ -120,7 +119,7 @@ text-align:left;
   width:85%;
 }
 #shill-paragraph strong{
-color:darkred;
+color:black;
 }
 #brand{
   color:rgba(0, 0, 0, 0.411);
