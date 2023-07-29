@@ -167,7 +167,7 @@ form.addEventListener("submit", (e) => {
             console.error("Error:", data.error);
             // You can log the error or display it to the user as needed
             // For example, show an error message to the user:
-            // showErrorToUser(data.error);
+            showErrorToUser(data.error);
           });
         }
         return response.text();
@@ -175,10 +175,10 @@ form.addEventListener("submit", (e) => {
       .then((data) => {
         // Handle the successful response from the server if needed
         console.log("Server response:", data);
-      })
-      .catch((error) => {
-        // Handle any other errors that may occur during the fetch request
-        console.error("Fetch error:", error);
       });
+    // .catch((error) => {
+    //   // Handle any other errors that may occur during the fetch request
+    //   console.error("Fetch error:", error);
+    // });
   }
 });

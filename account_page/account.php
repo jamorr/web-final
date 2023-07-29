@@ -41,8 +41,8 @@ $credits_response = json_decode($response, true);
         width: 100%;
       }
       .user-details {
-        flex: 1;
-        max-width: 500px;
+        /* flex: 1; */
+        width: 75%;
         margin: 0 auto;
         border: 1px solid #ccc;
         padding: 20px;
@@ -111,9 +111,8 @@ $credits_response = json_decode($response, true);
         <p id="first-name"><strong>First Name:</strong><?php echo $response['first_name']?></p>
         <p id="last-name"><strong>Last Name:</strong> <?php echo $response['last_name']?></p>
         <p id="email"><strong>Email:</strong><?php echo $email?></p>
-        <p><strong>Member Since:</strong> </p>
       </div>
-      <div class="cc-info">
+      <div class="user-details">
         <?php 
         $better_text = [
           "cc_name" => "Name",
@@ -124,17 +123,18 @@ $credits_response = json_decode($response, true);
           "cc_billing_addr" => "Billing Address",
           "cc_phone" => "Phone Number"
         ];
-        foreach ($credits_response as $key => $value) {
-            if ($key === "cc_num") {
-                $value = "************".substr($value, 12);
-            }
-            ?>
+        ?><pre><?php echo print_r($better_text, true)?></pre><?php
+foreach ($credits_response as $key => $value) {
+    if ($key === "cc_num") {
+        $value = "************".substr($value, 12);
+    }
+    ?>
         <p><strong><?php echo $better_text[$key]?></strong><?echo $value?></p>
             <?php
-        }
-        ?>
+}
+?>
       </div>
     </main>
-    <footer></footer>
+    <footer>&copy; 2023 nestXchange</footer>
   </body>
 </html>
