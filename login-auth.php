@@ -21,6 +21,7 @@ if (!$response) {
     }
     if ($response['new'] === true) {
         $_SESSION['new'] = true;
+        writeToTable("user_info", [], ["new"=> false], )
     }
     else {
         $_SESSION['new'] = false;

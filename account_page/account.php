@@ -1,4 +1,4 @@
-<?php  
+<?php
 session_start();
 if (!isset($_SESSION['auth']) || $_SESSION['auth'] = false) {
     header("Location: ../index.html");
@@ -116,26 +116,23 @@ $credits_response = json_decode($response, true);
       <div class="cc-info">
         <?php 
         $better_text = [
-          "cc-name" => "Name",
-          "cc-num" => "Card Number",
-          "cc-exp-MM" => "Expiration Month",
-          "cc-exp-YY" => "Expiration Year",
-          "cc-addr" => "Address",
-          "cc-billing-addr" => "Billing Address",
-
-          "cc-phone" => "Phone Number"
+          "cc_name" => "Name",
+          "cc_num" => "Card Number",
+          "cc_exp_MM" => "Expiration Month",
+          "cc_exp_YY" => "Expiration Year",
+          "cc_addr" => "Address",
+          "cc_billing_addr" => "Billing Address",
+          "cc_phone" => "Phone Number"
         ];
         foreach ($credits_response as $key => $value) {
-            if ($key === "cc-num") {
+            if ($key === "cc_num") {
                 $value = "************".substr($value, 12);
             }
             ?>
         <p><strong><?php echo $better_text[$key]?></strong><?echo $value?></p>
             <?php
         }
-        
         ?>
-        
       </div>
     </main>
     <footer></footer>
