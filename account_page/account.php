@@ -11,16 +11,16 @@ $response = readFromTable($query, []);
 $response = json_decode($response, true)[0];
 
 $credits_q = "SELECT * FROM Credit WHERE email = '$email'";
-$credits_response = readFromTable($query, ["aes-256-cbc", ["cc_num"]]);
-$credits_response = json_decode($response, true);
-
+$credits_response = readFromTable($credits_q, ["aes-256-cbc", ["cc_num"]]);
+$cred_enc = $credits_response;
+$credits_response = json_decode($credits_response, true);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="../styles/home_style.css" />
-    <link rel="styleshee" type="" href="../styles/slides.css" />
+    <link rel="stylesheet" type="" href="../styles/slides.css" />
     <title>Account Page</title>
     <style>
       body {
@@ -131,6 +131,7 @@ $credits_response = json_decode($response, true);
         <p><strong>Member Since:</strong> </p>
       </div>
       <div class="user-details">
+
         <?php 
         $better_text = [
           "cc_name" => "Name",
@@ -141,13 +142,20 @@ $credits_response = json_decode($response, true);
           "cc_billing_addr" => "Billing Address",
           "cc_phone" => "Phone Number"
         ];
-        foreach ($credits_response as $key => $value) {
-            if ($key === "cc_num") {
-                $value = "************".substr($value, 12);
+        foreach ($credits_response as $nul => $card) {
+            foreach($card as $key => $value) {
+                $edited_val = $value;
+                if ($key === "cc_num") {
+                    $last_4 = substr($value, -4, 4);
+                    $edited_val = "************".$last_4;
+                } elseif ($key === "email") {
+                    continue;
+                }
+                ?>
+        <p><strong><?php echo $better_text[$key]?></strong>:  <?php echo $edited_val?></p>
+                <?php
             }
-            ?>
-        <p><strong><?php echo $better_text[$key]?></strong><?echo $value?></p>
-            <?php
+            echo "<br><br>";
         }
         ?>
         <button type="button" onclick="showCreditModal();">Add payment info</button>
@@ -231,10 +239,11 @@ $credits_response = json_decode($response, true);
                   pattern="[0-9]{10,}"
                   title="Phone number must be at least 10 digits long."
                 />
-              </fieldset>
 
               <!-- submit button -->
               <input type="submit" name="submission" value="Submit" />
+              </fieldset>
+
             </form>
             <script src="./scripts/credit.js"></script>
 
