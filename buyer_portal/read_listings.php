@@ -41,5 +41,5 @@ for ($i=0; $i < count($element_ids); $i++) {
 // include offset and limit
 $sql .= "LIMIT {$offset}, {$limit}";
 
-readFromTable($sql, []);
+echo readFromTable($sql, []);
 ?>

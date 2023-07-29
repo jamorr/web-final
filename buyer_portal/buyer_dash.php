@@ -50,6 +50,7 @@
       }
     </style>
     <title>nestXchange • Dashboard</title>
+	<script src="scripts/wishlist.js"></script>
   </head>
   <body>
 	<header class="main-header">
@@ -57,6 +58,26 @@
 		<a href="../account_page/account.html">Account settings</a>
 	</header>
     <h1>Buyer Dashboard</h1>
+	
+	<!-- Cookie test -->
+	<?php 
+	
+	// Check is cookie is set, creates a new one if not.
+	// if (!isset($_COOKIE["wishlist"])) {
+	// 	setcookie("wishlist", json_encode(array()), time()+1000000);
+	// }
+	
+	// Add something to the cookie.
+	// $arr = json_decode($_COOKIE["wishlist"], true);
+	// array_push($arr, something);
+	// setcookie("wishlist", json_encode($arr), time()+1000000, "/");
+	
+	// Check the contents of the cookie.
+	$arr = json_decode($_COOKIE["wishlist"], true);
+	echo "'wishlist' cookie: ";
+	print_r($arr);
+	
+	?>
 
     <!-- Search elements -->
     <div id="search_container">
