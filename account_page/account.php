@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['auth']) || $_SESSION['auth'] = false) {
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] === false) {
     header("Location: ../index.html");
 }
 require "../common_database.php";
@@ -25,7 +25,9 @@ $credits_response = json_decode($credits_response, true);
   </head>
   <body>
     <header class="main-header">
-      <h1>nestXchange</h1>
+      <h1>nestXchange</h1><br>
+	  <a href="../buyer_portal/buyer_dash.php" style="color:white">Back to dashboard</a> • 
+	  <a href="../sign_out.php" style="color:white">Sign out</a>
     </header>
     <main>
       <h1>User Account Details</h1>

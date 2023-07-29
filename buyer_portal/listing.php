@@ -19,7 +19,8 @@ require_once 'read_listing_details.php';
 		<!-- Header -->
 		<header class="main-header">
 			<h1>nestXchange</h1>
-			<a href="../account_page/account.">Account settings</a>
+			<a href="../account_page/account.php">Account settings</a> • 
+			<a href="../sign_out.php">Sign out</a>
       <div id="user_identifier">
       <?php
         echo $_SESSION['email'] 
