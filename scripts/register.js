@@ -5,17 +5,17 @@
     var email = document.getElementById("email");
     var pass = document.getElementById("pass");
     var pass2 = document.getElementById("pass2");
-    const form = document.getElementById("form");
+    const form = document.getElementById("reg-form");
 
 
 function handleSubmit(event){
 event.preventDefault();
-validate();
+validatereg();
 }
 form.addEventListener("submit", handleSubmit);
 
 // Main Validation Function
-function validate() {
+function validatereg() {
     let error = 0; // Variable to track if there are any errors
 
     // Removes all existing error messages from the DOM
@@ -90,7 +90,7 @@ function validate() {
             add_error(firstname,String(data["error"]));
           }
           else{
-        //Success message
+            showTab("login");
 
           }
         })

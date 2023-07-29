@@ -61,7 +61,33 @@ loginform.addEventListener("submit", (e) => {
   fetch(url, {
     method: "POST",
     body: formData,
-  }).then((data) => {
-    add_error(l_email, "Invalid username or pass");
-  });
+  })
+  .then((response) => {
+    if (!response.ok) {
+      // If the response status code indicates an error (e.g., 500), handle the error
+      return response.json().then((data) => {
+        console.error("Error:", data.error);
+        // You can log the error or display it to the user as needed
+        // For example, show an error message to the user:
+        // showErrorToUser(data.error);
+        return Promise.reject(data.error); // Return a rejected Promise to trigger the catch block
+      });
+    }
+    return response.text();
+  })
+  .then((data) => {
+    if(data == "Success"){
+      window.location.href = './buyer_portal/buyer_dash.php';
+    }
+      console.log("Server response:", data);
+      // data = JSON.parse(data);
+    // Handle the successful response from the server if needed
+    if(!data["success"]){
+      add_error(l_email,String(data["error"]));
+    }
+    else{
+      showTab("login");
+
+    }
+  })
 });
