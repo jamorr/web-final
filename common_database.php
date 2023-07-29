@@ -60,20 +60,16 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
         foreach ($decoded as $key => $value) {
             $key_str .= $key . ",";
             if ($encrypt && in_array($key, $encrypt[1])) {
-                array_push($value_array,encryptData($value, $table_vars[2], $encrypt[0]));
+                array_push($value_array, encryptData($value, $table_vars[2], $encrypt[0]));
             } else {
                 // Use real_escape_string to avoid SQL injection
-                array_push($value_array,$value); 
+                array_push($value_array, $value); 
             }
         }
         
         $key_str = rtrim($key_str, ",");
         $val_str = rtrim($val_str, ",");
-        // $numvals = count($decoded);
-        // $placeholders = rtrim(str_repeat("?,", $numvals), ',');
-        // $values = array_values((array) $val_str);
-        // print_r($values);
-        // echo $values;
+
         $stmt = $conn->prepare($bind);  
         $stmt->bind_param($param_types, ...$value_array);
         $stmt->execute();
@@ -85,7 +81,7 @@ function writeToTable(string $table, array $encrypt, $data, $bind, $param_types)
             $response = ["success" => true, "message" => "Registration successful!"];
         }
         $conn->close();
-       echo json_encode($response);
+        echo json_encode($response);
 
 
 
