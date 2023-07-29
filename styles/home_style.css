@@ -98,4 +98,38 @@
   color:red;
   font-size:50%;
 
-  }   
+  } 
+body{
+
+  text-align:center
+}
+.slider{
+margin:auto;
+
+}
+.main-header{
+text-align:left;
+
+}
+#shill-paragraph{
+  margin:auto;
+  text-align:center;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  width:85%;
+}
+#shill-paragraph strong{
+color:darkred;
+}
+#brand{
+  color:rgba(0, 0, 0, 0.411);
+  font-size: 20pt;
+
+}
+.brand-name{
+font-size: 25px;
+color:gold;
+
+
+}
