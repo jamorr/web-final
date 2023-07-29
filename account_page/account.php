@@ -86,7 +86,7 @@ $credits_response = json_decode($response, true);
         color: #000 !important;
         background-color: #fff !important;
       }
- fieldset {
+      fieldset {
         display: inline;
       }
       .label-div {
